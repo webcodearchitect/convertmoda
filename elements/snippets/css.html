@@ -1,0 +1,161 @@
+{% set padding_home = banners.home.slides
+    ? ((banners.home.slides[0].height / banners.home.slides[0].width) * 100)
+    : (banners.home.width ? ((banners.home.height / banners.home.width) * 100) : 0) %}
+
+{# Theme styles #}
+
+<style>
+    html{
+        --bg_body                            : {{ settings.bg_body                             }};
+        --color_primary                      : {{ settings.color_primary                       }};
+        --color_second                       : {{ settings.color_second                        }};
+        --color_text                         : {{ settings.color_text                          }};
+        --color_text_description             : {{ settings.color_text_description              }};
+        --color_button_primary               : {{ settings.color_button_primary                }};
+        --bg_button_primary                  : {{ settings.bg_button_primary                   }};
+        --bg_popup_news                      : {{ settings.bg_popup_news                       }};
+        --text_popup_news                    : {{ settings.text_popup_news                     }};
+        --bg_button_secondary                : {{ settings.bg_button_secondary                 }};
+        --bg_blog                            : {{ settings.bg_blog                             }};
+        --button_blog                        : {{ settings.button_blog                         }};
+        --button_blog2                       : {{ settings.button_blog2                        }};
+        --color_button_blog                  : {{ settings.color_button_blog                   }};
+        --color_title_blog                   : {{ settings.color_title_blog                    }};
+        --color_blog                         : {{ settings.color_blog                          }};
+        --bg_post                            : {{ settings.bg_post                             }};
+        --bg_depoimento                      : {{ settings.bg_depoimento                       }};
+        --text_depoimento                    : {{ settings.text_depoimento                     }};
+        --title_depoimento                   : {{ settings.title_depoimento                    }};
+        --cart_number                        : {{ settings.cart_number                         }};
+        --cart_number_bg                     : {{ settings.cart_number_bg                      }};
+        --border_title_list                  : {{ settings.border_title_list                   }};
+        --color_footer                       : {{ settings.color_footer                        }};
+        --color_footer2                      : {{ settings.color_footer2                       }};
+        --color_text_footer                  : {{ settings.color_text_footer                   }};
+        --color_text_button_footer           : {{ settings.color_text_button_footer            }};
+        --color_border_footer                : {{ settings.color_border_footer                 }};
+        --color_icon_footer                  : {{ settings.color_icon_footer                   }};
+        --color_title_footer                 : {{ settings.color_title_footer                  }};
+        --color_footer_newsletter            : {{ settings.color_footer_newsletter             }};
+        --color_footer_newsletter_text       : {{ settings.color_footer_newsletter_text        }};
+        --color_footer_newsletter_input      : {{ settings.color_footer_newsletter_input       }};
+        --color_footer_newsletter_input_color: {{ settings.color_footer_newsletter_input_color }};
+        --bg_input                           : {{ settings.bg_input                            }};
+        --text_input                         : {{ settings.text_input                          }};
+        --border_input                       : {{ settings.border_input                        }};
+        --social_bg                          : {{ settings.social_bg                           }};
+        --social_bg_hover                    : {{ settings.social_bg_hover                     }};
+        --social_color                       : {{ settings.social_color                        }};
+        --header_top                         : {{ settings.header_top                          }};
+        --border_top2                        : {{ settings.border_top2                         }};
+        --border_top                         : {{ settings.border_top                          }};
+        --header_top_second                  : {{ settings.header_top_second                   }};
+        --header_icon_top                    : {{ settings.header_icon_top                     }};
+        --header_text_top                    : {{ settings.header_text_top                     }};
+        --header_search_icon                 : {{ settings.header_search_icon                  }};
+        --header_text_search_top             : {{ settings.header_text_search_top              }};
+        --header_top_border                  : {{ settings.header_top_border                   }};
+        --header_text_hover                  : {{ settings.header_text_hover                   }};
+        --bg_sub                             : {{ settings.bg_sub                              }};
+        --nav_bg                             : {{ settings.nav_bg                              }};
+        --nav_color                          : {{ settings.nav_color                           }};
+        --nav_color_sub                      : {{ settings.nav_color_sub                       }};
+        --nav_color_border                   : {{ settings.nav_color_border                    }};
+        --banner_dot                         : {{ settings.banner_dot                          }};
+        --banner_info_bg                     : {{ settings.banner_info_bg                      }};
+        --banner_info_color                  : {{ settings.banner_info_color                   }};
+        --banner_info_ico                    : {{ settings.banner_info_ico                     }};
+        --banner_featured_color              : {{ settings.banner_featured_color               }};
+        --color_title_category_per           : {{ settings.color_title_category_per            }};
+        --tag_desconto_bg                    : {{ settings.tag_desconto_bg                     }};
+        --tag_frete_bg                       : {{ settings.tag_frete_bg                        }};
+        --tag_lancamento_bg                  : {{ settings.tag_lancamento_bg                   }};
+        --tag_destaque_bg                    : {{ settings.tag_destaque_bg                     }};
+        --title_list                         : {{ settings.title_list                          }};
+        --button_details                     : {{ settings.button_details                      }};
+        --button_details_hover               : {{ settings.button_details_hover                }};
+        --preco_color                        : {{ settings.preco_color                         }};
+        --payment_color                      : {{ settings.payment_color                       }};
+        --color_name_product                 : {{ settings.color_name_product                  }};
+        --tags_product_bg                    : {{ settings.tags_product_bg                     }};
+        --tag_color                          : {{ settings.tag_color                           }};
+        --preco_color_product                : {{ settings.preco_color_product                 }};
+        --payment_color_product              : {{ settings.payment_color_product               }};
+        --button_buy                         : {{ settings.button_buy                          }};
+        --button_buy2                        : {{ settings.button_buy2                         }};
+        --input_frete_color                  : {{ settings.input_frete_color                   }};
+        --input_frete_bg                     : {{ settings.input_frete_bg                      }};
+        --input_frete_border                 : {{ settings.input_frete_border                  }};
+        --button_frete                       : {{ settings.button_frete                        }};
+        --button_frete2                      : {{ settings.button_frete2                       }};
+        --color_text_footer_link             : {{ settings.color_text_footer_link              }};
+        --bg_category_per                    : {{ settings.bg_category_per                     }};
+        --rastreio_text                      : {{ settings.rastreio_text                       }};
+        --rastreio_bg                        : {{ settings.rastreio_bg                         }};
+        --rastreio_bg2                       : {{ settings.rastreio_bg2                        }};
+        --rastreio_button                    : {{ settings.rastreio_button                     }};
+        --rastreio_button_hover              : {{ settings.rastreio_button_hover               }};
+        --color_bar_text_footer              : {{ settings.color_bar_text_footer               }};
+        --color_border                       : {{ settings.color_border                        }};
+        --color_box_product                  : {{ settings.color_box_product                   }};
+        --bg_box_product                     : {{ settings.bg_box_product                      }};
+        --bg_banner_full                     : {{ settings.bg_banner_full                      }};
+        --bg_dots_banner_full                : {{ settings.bg_dots_banner_full                 }};
+        --button_frete_color                 : {{ settings.button_frete_color                  }};
+        --button_buy_color                   : {{ settings.button_buy_color                    }};
+        --bg_form                            : {{ settings.bg_form                             }};
+        --variant_border                     : {{ settings.variant_border                      }};
+        --input_quant                        : {{ settings.input_quant                         }};
+        --variant_selected                   : {{ settings.variant_selected                    }};
+        --variant_selected_check             : {{ settings.variant_selected_check              }};
+        --bg_menu_mobile                     : {{ settings.bg_menu_mobile                      }};
+        --bg_menu_mobile2                    : {{ settings.bg_menu_mobile2                     }};
+        --color_text_menu                    : {{ settings.color_text_menu                     }};
+        --bg_category_section                : {{ settings.bg_category_section                 }};
+        --bg2_category_section               : {{ settings.bg2_category_section                }};
+        --color_category_title               : {{ settings.color_category_title                }};
+        --border_category_section            : {{ settings.border_category_section             }};
+        --chat_cart                          : {{ settings.cart_number_bg                      }};
+        --padding_home                       : {{ padding_home                                 }}%;
+        --variant_selected_check_image       : url("data:image/svg+xml,%3Csvg fill='%23{{ settings.variant_selected_check | replace({'#': ''}) }}' xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cg transform='translate(-450.628 -764.6)'%3E%3Cg transform='translate(450.921 765.962)'%3E%3Cpath d='M.135 4.686A.434.434 0 0 0 .271 5l2.077 2.076a.434.434 0 0 0 .611 0l4.419-4.413a.433.433 0 0 0 .03-.611.166.166 0 0 0-.025-.025.429.429 0 0 0-.61 0l-4.11 4.107L.886 4.357a.438.438 0 0 0-.307-.123.445.445 0 0 0-.443.452z' transform='translate(-.135 -1.898)' style='opacity:.99;fill:%233f303d;stroke:%233f303d;stroke-width:.6px'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+        --arrow_third                        : url("data:image/svg+xml,%3Csvg fill='%23{{ settings.nav_color_border       | replace({'#': ''}) }}' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 492.004 492.004'%3E%3Cpath d='M382.678,226.804L163.73,7.86C158.666,2.792,151.906,0,144.698,0s-13.968,2.792-19.032,7.86l-16.124,16.12 c-10.492,10.504-10.492,27.576,0,38.064L293.398,245.9l-184.06,184.06c-5.064,5.068-7.86,11.824-7.86,19.028 c0,7.212,2.796,13.968,7.86,19.04l16.124,16.116c5.068,5.068,11.824,7.86,19.032,7.86s13.968-2.792,19.032-7.86L382.678,265 c5.076-5.084,7.864-11.872,7.848-19.088C390.542,238.668,387.754,231.884,382.678,226.804z'/%3E%3C/svg%3E") no-repeat left center;
+        --arrow_right                        : url("data:image/svg+xml,%3Csvg fill='%23{{ settings.color_text             | replace({'#': ''}) }}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M30.58 21.98l-17.2 17.2a2.8 2.8 0 1 1-3.962-3.961L24.638 20 9.42 4.782A2.8 2.8 0 0 1 13.381.821l17.2 17.2a2.8 2.8 0 0 1 0 3.961z' /%3E%3C/svg%3E");
+        --arrow_button                       : url("data:image/svg+xml,%3Csvg fill='%23{{ settings.color_button_primary   | replace({'#': ''}) }}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M30.58 21.98l-17.2 17.2a2.8 2.8 0 1 1-3.962-3.961L24.638 20 9.42 4.782A2.8 2.8 0 0 1 13.381.821l17.2 17.2a2.8 2.8 0 0 1 0 3.961z' /%3E%3C/svg%3E");
+        --arrow_filter                       : url("data:image/svg+xml,%3Csvg fill='%23{{ settings.color_second           | replace({'#': ''}) }}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M30.58 21.98l-17.2 17.2a2.8 2.8 0 1 1-3.962-3.961L24.638 20 9.42 4.782A2.8 2.8 0 0 1 13.381.821l17.2 17.2a2.8 2.8 0 0 1 0 3.961z' /%3E%3C/svg%3E");
+        --arrow_select                       : url("data:image/svg+xml,%3Csvg fill='%23{{ settings.text_input             | replace({'#': ''}) }}' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 284.929 284.929'%3E%3Cpath d='M282.082,76.511l-14.274-14.273c-1.902-1.906-4.093-2.856-6.57-2.856c-2.471,0-4.661,0.95-6.563,2.856L142.466,174.441 L30.262,62.241c-1.903-1.906-4.093-2.856-6.567-2.856c-2.475,0-4.665,0.95-6.567,2.856L2.856,76.515C0.95,78.417,0,80.607,0,83.082 c0,2.473,0.953,4.663,2.856,6.565l133.043,133.046c1.902,1.903,4.093,2.854,6.567,2.854s4.661-0.951,6.562-2.854L282.082,89.647 c1.902-1.903,2.847-4.093,2.847-6.565C284.929,80.607,283.984,78.417,282.082,76.511z' /%3E%3C/svg%3E%0A");
+        --trash                              : url("data:image/svg+xml,%3Csvg fill='%23{{ settings.color_primary          | replace({'#': ''}) }}' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 438.529 438.529'%3E%3Cpath d='M417.689,75.654c-1.711-1.709-3.901-2.568-6.563-2.568h-88.224L302.917,25.41c-2.854-7.044-7.994-13.04-15.413-17.989C280.078,2.473,272.556,0,264.945,0h-91.363c-7.611,0-15.131,2.473-22.554,7.421c-7.424,4.949-12.563,10.944-15.419,17.989l-19.985,47.676h-88.22c-2.667,0-4.853,0.859-6.567,2.568c-1.709,1.713-2.568,3.903-2.568,6.567v18.274c0,2.664,0.855,4.854,2.568,6.564c1.714,1.712,3.904,2.568,6.567,2.568h27.406v271.8c0,15.803,4.473,29.266,13.418,40.398c8.947,11.139,19.701,16.703,32.264,16.703h237.542c12.566,0,23.319-5.756,32.265-17.268c8.945-11.52,13.415-25.174,13.415-40.971V109.627h27.411c2.662,0,4.853-0.856,6.563-2.568c1.708-1.709,2.57-3.9,2.57-6.564V82.221C420.26,79.557,419.397,77.367,417.689,75.654z M169.301,39.678c1.331-1.712,2.95-2.762,4.853-3.14h90.504c1.903,0.381,3.525,1.43,4.854,3.14l13.709,33.404H155.311L169.301,39.678z M347.173,380.291c0,4.186-0.664,8.042-1.999,11.561c-1.334,3.518-2.717,6.088-4.141,7.706c-1.431,1.622-2.423,2.427-2.998,2.427H100.493c-0.571,0-1.565-0.805-2.996-2.427c-1.429-1.618-2.81-4.188-4.143-7.706c-1.331-3.519-1.997-7.379-1.997-11.561V109.627h255.815V380.291z'%3E%3C/path%3E%3Cpath d='M137.04,347.172h18.271c2.667,0,4.858-0.855,6.567-2.567c1.709-1.718,2.568-3.901,2.568-6.57V173.581c0-2.663-0.859-4.853-2.568-6.567c-1.714-1.709-3.899-2.565-6.567-2.565H137.04c-2.667,0-4.854,0.855-6.567,2.565c-1.711,1.714-2.568,3.904-2.568,6.567v164.454c0,2.669,0.854,4.853,2.568,6.57C132.186,346.316,134.373,347.172,137.04,347.172z'%3E%3C/path%3E%3Cpath d='M210.129,347.172h18.271c2.666,0,4.856-0.855,6.564-2.567c1.718-1.718,2.569-3.901,2.569-6.57V173.581c0-2.663-0.852-4.853-2.569-6.567c-1.708-1.709-3.898-2.565-6.564-2.565h-18.271c-2.664,0-4.854,0.855-6.567,2.565c-1.714,1.714-2.568,3.904-2.568,6.567v164.454c0,2.669,0.854,4.853,2.568,6.57C205.274,346.316,207.465,347.172,210.129,347.172z'%3E%3C/path%3E%3Cpath d='M283.22,347.172h18.268c2.669,0,4.859-0.855,6.57-2.567c1.711-1.718,2.562-3.901,2.562-6.57V173.581c0-2.663-0.852-4.853-2.562-6.567c-1.711-1.709-3.901-2.565-6.57-2.565H283.22c-2.67,0-4.853,0.855-6.571,2.565c-1.711,1.714-2.566,3.904-2.566,6.567v164.454c0,2.669,0.855,4.853,2.566,6.57C278.367,346.316,280.55,347.172,283.22,347.172z'%3E%3C/path%3E%3C/svg%3E");
+        --arrow_slide                        : url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cg transform='translate(-233 -322)'%3E%3Cg transform='translate(213.975 302.833)'%3E%3Cpath style='fill:%23{{ settings.arrow_slide|replace({'#': ''}) }};stroke:%23{{ settings.bg_body|replace({'#': ''}) }};stroke-width:4px' d='M51.383 54.45L36.1 39.167l15.283-15.284-4.717-4.717-20 20 20 20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        --arrow_post                         : url("data:image/svg+xml,%3Csvg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 31.49 31.49' style='enable-background:new 0 0 31.49 31.49;' xml:space='preserve'%3E%3Cpath d='M21.205,5.007c-0.429-0.444-1.143-0.444-1.587,0c-0.429,0.429-0.429,1.143,0,1.571l8.047,8.047H1.111 C0.492,14.626,0,15.118,0,15.737c0,0.619,0.492,1.127,1.111,1.127h26.554l-8.047,8.032c-0.429,0.444-0.429,1.159,0,1.587c0.444,0.444,1.159,0.444,1.587,0l9.952-9.952c0.444-0.429,0.444-1.143,0-1.571L21.205,5.007z'/%3E%3C/svg%3E");
+    }
+</style>
+
+{% set minified  = true %}
+{% set extension = minified ? '.min.css' : '.css' %}
+
+<link rel="preload"    href="{{ themePath }}css/fonts/PTSans-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload"    href="{{ themePath }}css/fonts/PTSans-Bold.woff2"    as="font" type="font/woff2" crossorigin="anonymous">
+
+<link rel="preload"    href="{{ asset("css/default#{extension}") }}" as="style">
+<link rel="stylesheet" href="{{ asset("css/default#{extension}") }}">
+
+{% if pages.current == 'product' %}
+
+    <link rel="preload"    href="{{ asset("css/product#{extension}") }}" as="style">
+    <link rel="stylesheet" href="{{ asset("css/product#{extension}") }}">
+
+{% elseif pages.current in ['catalog', 'search'] %}
+
+    <link rel="preload"    href="{{ asset("css/catalog#{extension}") }}" as="style">
+    <link rel="stylesheet" href="{{ asset("css/catalog#{extension}") }}">
+
+{% elseif not pages.current in ['home', 'catalog', 'product'] %}
+
+    <link rel="preload"    href="{{ asset("css/about#{extension}") }}" as="style">
+    <link rel="stylesheet" href="{{ asset("css/about#{extension}") }}">
+
+{% elseif pages.current in ['noticia', 'busca_noticias'] %}
+
+    <link rel="preload"    href="{{ asset("css/blog#{extension}") }}" as="style">
+    <link rel="stylesheet" href="{{ asset("css/blog#{extension}") }}">
+
+{% endif %}

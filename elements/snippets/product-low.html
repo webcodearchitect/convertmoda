@@ -1,0 +1,25 @@
+{% for item in products %}
+	<a href="{{ item.link }}" class="flex product-low">
+		<div class="image">
+			<img class="lazyload" data-src="{{ item.images[0].large }}" alt="{{ item.name }}">
+		</div>
+		<div class="content-full">
+
+			<span class="title">
+				{{ item.name }}
+			</span>
+
+			{% if settings.star_list %}
+				<div class="list-star flex justify-center">
+					{% element 'snippets/ranking' {
+						'review': product.ranking
+					} %}
+				</div>
+			{% endif %}
+
+			<div class="price">{{ settings.currency }} {{ item.price_offer > 0 ? item.price_offer | currency : item.price | currency }}</div>
+			<div class="view">Ver detalhes</div>
+
+		</div>
+	</a>
+{% endfor %}

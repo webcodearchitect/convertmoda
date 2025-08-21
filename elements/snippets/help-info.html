@@ -1,0 +1,124 @@
+{% if mobile is not defined %}
+    {% set mobile = false %}
+{% endif %}
+
+<div id="{%- if mobile -%} help-info-box-mobile {%- else -%} help-info-box {%- endif -%}" class="help-info-box">
+
+    {% if not mobile %}
+        <div class="close-box close-overlay">
+            <i class="icon icon-times"></i>
+        </div>
+    {% endif %}
+
+    {% if mobile %}
+        <div class="back">
+            <i class="icon icon-arrow-left"></i>
+            <div class="block-title flex align-center">
+                <i class="icon icon-help"></i>
+                {{ settings.text_help ? settings.text_help : 'Precisa de ajuda?' }}
+            </div>
+        </div>
+
+    {% else %}
+
+        <div class="block-title flex align-center">
+            <i class="icon icon-help"></i>
+            {{ settings.text_help ? settings.text_help : 'Precisa de ajuda?' }}
+        </div>
+
+    {% endif %}
+
+    <ul class="contact-options">
+        <li>
+            <a href="{{ links.contact }}" data-tray-tst="fale_conosco">
+                <i class="icon icon-reviews v-align-middle"></i>
+                Entre em contato
+            </a>
+        </li>
+
+        {% if settings.whatsapp_number != '' %}
+            <li>
+                {% element 'snippets/whatsapp' { 'local': 'inline', 'include_text' : true } %}
+            </li>
+        {% endif %}
+
+        {% if settings.phone %}
+            {% set link = settings.phone | replace({'(': '', ')': '', '-': '', ' ': ''}) %}
+            <li>
+                <a href="tel:{{ link }}">
+                    <i class="icon icon-phone v-align-middle"></i>
+                    Tel: {{ settings.phone }}
+                </a>
+            </li>
+        {% endif %}
+
+        {% if settings.email_contact %}
+            <li>
+                <a href="mailto:{{ settings.email_contact }}">
+                    <i class="icon icon-email v-align-middle"></i>
+                    {{ settings.email_contact }}
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+
+    {% if settings.enable_tracking %}
+
+        <div class="tracking">
+
+            <div class="message">
+                Digite o c&oacute;digo de rastreio e acompanhe o seu pedido:
+            </div>
+
+            {% if settings.tracking_option == 'vaichegar' %}
+
+                <form class="tracking-form flex justify-between" method="get" action="https://www.vaichegar.com.br/" target="_blank">
+                    <input type="text" name="id" placeholder="C&oacute;digo de rastreio">
+                    <button type="submit" class="button tracking-button">
+                        Rastrear
+                        <i class="icon icon-arrow-right"></i>
+                    </button>
+                </form>
+
+            {% elseif settings.tracking_option == 'rastreie' %}
+
+                <form class="tracking-form flex justify-between tracking-action" method="post" data-action="//rastreie.com/{query}" action="#" target="_blank">
+                    <input type="text" placeholder="C&oacute;digo de rastreio" required>
+                    <button type="submit" class="button tracking-button">
+                        Rastrear
+                        <i class="icon icon-arrow-right"></i>
+                    </button>
+                </form>
+
+            {% elseif settings.tracking_option == 'muambator' %}
+
+                <form class="tracking-form flex justify-between tracking-action" method="post" data-action="//www.muambator.com.br/pacotes/{query}/detalhes" action="#" target="_blank" >
+                    <input type="text" placeholder="C&oacute;digo de rastreio" required>
+                    <button type="submit" class="button tracking-button">
+                        Rastrear
+                        <i class="icon icon-arrow-right"></i>
+                    </button>
+                </form>
+
+            {% else %}
+
+                <form class="tracking-form flex justify-between" method="post" action="https://www2.correios.com.br/sistemas/rastreamento/ctrl/ctrlRastreamento.cfm?" target="_blank">
+                    <input type="hidden" name="track" value="track">
+                    <input type="text" name="objetos" placeholder="C&oacute;digo de rastreio" required>
+                    <button type="submit" class="button tracking-button">
+                        Rastrear
+                        <i class="icon icon-arrow-right"></i>
+                    </button>
+                </form>
+
+            {% endif %}
+
+        </div>
+    {% endif %}
+
+    <div class="social-media flex justify-center">
+        {% element 'snippets/social-media' %}
+    </div>
+
+</div>
+

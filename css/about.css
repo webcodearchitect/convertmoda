@@ -1,0 +1,326 @@
+/* login */
+.Seguro {
+    display: none;
+}
+
+.page-login .titulo-login {
+    display: none;
+}
+
+.page-login .carrinho-heading {
+    display: none;
+}
+
+.page-login .page-content .board {
+    display: flex;
+}
+
+.caixa-login, .caixa-cadastro {
+    border: 1px solid var(--color_border);
+    padding-top: 20px;
+    max-width: 550px;
+    width: 100%;
+    margin: 0 30px 40px;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.caixa-login fieldset, .caixa-cadastro fieldset {
+    border: 0;
+    padding: 0;
+}
+
+.caixa-login fieldset {
+    margin-top: 10px;
+}
+
+.caixa-cadastro p:first-child {
+    display: block;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.caixa-cadastro fieldset input {
+    width: 100%;
+    display: block;
+}
+
+.caixa-cadastro fieldset .botao-novo-cadastro {
+    line-height: 52px;
+    margin-top: 10px;
+}
+
+@media (max-width: 767px) {
+    .page-login .page-content .board {
+        flex-direction: column;
+    }
+    .caixa-login, .caixa-cadastro {
+        margin: 20px 0;
+    }
+}
+
+/* registro */
+
+.page-register .board h1 {
+    text-align: center;
+    margin: 0 0 20px
+}
+
+.page-register #frm2 {
+    text-align: center;
+}
+
+.page-register #frm2 fieldset {
+    text-align: left;
+}
+
+.page-register #CadastroAbas {
+    text-align: center;
+    margin: 0 0 20px;
+}
+
+.page-register #CadastroAbas li {
+    display: inline-block;
+    margin: 0 10px 5px;
+}
+
+.page-register #CadastroAbas li a {
+    border: 1px solid var(--color_border);
+    font-size: .875rem;
+    width: 137px;
+    text-align: center;
+    -webkit-transition: ease-in-out .3s;
+    -o-transition: ease-in-out .3s;
+    transition: ease-in-out .3s;
+    display: inline-block;
+    line-height: 40px;
+    font-weight: 700;
+}
+
+.page-register #CadastroAbas li.aberta a {
+    background-color: var(--bg_button_primary);
+    color: var(--color_button_primary);
+    border-color: var(--bg_button_primary);
+}
+
+.page-register h2 {
+    font-size: 1rem;
+    text-align: center;
+}
+
+.page-register .page-content fieldset {
+    border: 0;
+    margin: 20px auto 0;
+    width: 100%;
+    max-width: 450px;
+    border: 1px solid var(--color_border);
+    padding: 20px;
+    font-size: .875rem;
+    border-radius: 8px;
+}
+
+.page-register .topBorder+.board {
+    text-align: center;
+    margin: 20px 0 0;
+}
+
+#juridica, #fisica {
+    margin: 20px 0 0;
+}
+
+.page-register .page-content fieldset label {
+    display: block;
+    margin: 5px 0 0;
+}
+
+.page-register .page-content fieldset strong, .page-register .page-content fieldset b {
+    font-weight: 600;
+}
+
+.page-register fieldset input[type="tel"], .page-register fieldset input[type="email"], .page-register fieldset input[type="password"], .page-register fieldset select, .page-register fieldset input[type="text"] {
+    margin: 4px 0 0;
+    /* background-color: #f5f5f5;
+    border: 0; */
+    -webkit-transition: ease-in-out .3s;
+    -o-transition: ease-in-out .3s;
+    transition: ease-in-out .3s;
+}
+
+.page-register fieldset input[type="tel"]:focus, .page-register fieldset input[type="email"]:focus, .page-register fieldset input[type="password"]:focus, .page-register fieldset input[type="text"]:focus {
+    -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+}
+
+.page-register fieldset input[size="50"], .page-register fieldset input[size="40"] {
+    width: 100%;
+}
+
+fieldset {
+    border: 0;
+}
+
+.blocoAlerta, .blocoAlerta {
+    padding: 5px 0;
+    font-size: .75rem;
+    color: #da0808;
+    margin: 5px 0;
+    display: block;
+}
+
+.mensagensErro {
+    color: #da0808;
+    font-size: .75rem;
+    padding: 4px 0 4px;
+    display: inline-block;
+}
+
+@media (max-width: 480px) {
+    .page-register .page-content fieldset {
+        border: 0;
+        padding: 0;
+    }
+}
+
+/* panel */
+
+#lightwindow, #lightwindow_overlay {
+    display: none;
+}
+
+.sidebar-central {
+    width: 250px;
+    margin-right: 30px;
+}
+
+.sidebar-central h4 {
+    font-weight: 600;
+    font-size: .9rem;
+    margin: 10px 0 4px;
+}
+
+.sidebar-central a {
+    font-size: .875rem;
+    display: inline-block;
+    margin: 4px 0;
+}
+
+.central-menu {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+}
+
+.col-panel {
+    width: calc(100% - 280px);
+    font-size: .875rem;
+}
+
+.col-panel h1, .col-panel h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 10px;
+}
+
+.col-panel .icoPai {
+    width: 100%;
+    margin: 20px 0 0;
+    padding: 0 10px;
+}
+
+.col-panel .icoFilho {
+    padding: 0 10px;
+    display: inline-block;
+    text-align: center;
+}
+
+.icoFilho .bgcolor {
+    background: var(--color_text);
+}
+
+@media (max-width: 550px) {
+    form[action*="central_premiacao_historico"] input {
+        width: 100%;
+        display: block;
+        max-width: 300px;
+        margin-bottom: 10px;
+    }
+}
+
+.col-panel .icoPai img {
+    display: none;
+}
+
+.central-icons {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.central-icons a {
+    -webkit-box-ordinal-group: 0;
+    -ms-flex-order: -1;
+    order: -1;
+    display: block;
+    padding-bottom: 20px;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    text-align: center;
+}
+
+.central-icons p {
+    margin-top: -15px;
+}
+
+.col-panel .tablePage {
+    border: 1px solid #e4e4e4;
+}
+
+.col-panel strong, .col-panel b {
+    font-weight: 600;
+}
+
+.col-panel .tablePage th, .col-panel .tablePage td {
+    border: 1px solid #e4e4e4;
+    padding: 5px;
+}
+
+.table-overflow {
+    overflow: auto;
+    width: 100%;
+}
+
+@media (max-width: 991px) {
+    .col-panel {
+        width: 100%;
+        margin: 20px 0;
+    }
+    .sidebar-central {
+        width: 100%;
+        margin: 0;
+    }
+    .line-panel {
+        display: block;
+    }
+}
+
+.is-custom-page .page-title{
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.875rem;
+}
+
+@media (max-width: 767px) {
+    .is-custom-page .page-title{
+        font-size: 1.375rem;
+        font-weight: 700;
+        margin-bottom: 1.25rem;
+    }
+}

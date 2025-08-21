@@ -1,0 +1,50 @@
+{% if settings.text_maisvendido %}
+    <div class="bg-cat">
+
+        {% if settings.bg_bloco_produtos %}
+            <img class="image-bg lazyload" data-src="{{ asset(settings.bg_bloco_produtos) }}" alt="Bg produtos">
+        {% endif %}
+
+        <div class="container flex align-center">
+
+            {% if banners.extra4 or banners.extra5 %}
+                {% if banners.extra5 and utils.is_mobile %}
+                    
+                    {% set link = banners.extra5.tracked_link ? banners.extra5.tracked_link : banners.extra4.link %}
+                    <div class="image">
+                        <a {% if link %} href="{{ link }}" target="{{ banners.extra5.target }}" {% endif %}>
+                            <img src="{{ banners.extra5.src }}" alt="{{ banners.extra5.alt }}">
+                        </a>
+                    </div>
+
+                {% else %}
+
+                    {% set link = banners.extra4.tracked_link ? banners.extra4.tracked_link : banners.extra4.link %}
+                    <div class="image">
+                        <a {% if link %} href="{{ link }}" target="{{ banners.extra4.target }}" {% endif %}>
+                            <img src="{{ banners.extra4.src }}" alt="{{ banners.extra4.alt }}">
+                        </a>
+                    </div>
+
+                {% endif %}
+            {% endif %}
+
+            <div class="item">
+                <div class="title-section">
+                    <span>{{ settings.text_maisvendido }}</span>
+                </div>
+
+                {% set product = Products({
+                    'filter' : ['available', 'new'],
+                    'order'  : {'quantity_sold': 'desc'},
+                    'limit'  : 3
+                }) %}
+
+                {% element 'snippets/product-low' {
+                    "products": product
+                } %}
+
+            </div>
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,56 @@
+<style>
+    .old-browser{
+        font-family: "{{ settings.font_family }}", sans-serif;
+    }
+</style>
+
+<div class="container">
+    <img class="old-browser-lost" src="{{ asset('img/lost.svg') }}"  alt="N&atilde;o suportado">
+    <h1 class="old-browser-title">Oops... Navegador n&atilde;o suportado</h1>
+    <div class="old-browser-info">
+        <p>
+            Detectamos que voc&ecirc; est&aacute; usando um navegador antigo para acessar essa loja. Sentimos lhe informar, mas tais navegadores n&atilde;o s&atilde;o mais suportados
+            em nossa loja.
+        </p>
+        <p>
+            Navegadores antigos possuem s&eacute;rios problemas de seguran&ccedil;a e n&atilde;o implementam diversos recursos modernos necess&aacute;rios para que voc&ecirc; tenha uma experi&ecirc;ncia
+            incr&iacute;vel em nossa loja.
+        </p>
+        <p>
+            Mas isso &eacute; muito simples de voc&ecirc; resolver. Atualize seu navegador para a vers&atilde;o mais recente para continuar navegando e encontrando produtos excelentes. Escolha um de sua
+            prefer&ecirc;ncia abaixo e comece aproveitar os produtos que temos pra lhe oferecer.
+        </p>
+    </div>
+    <ul class="old-browser-options">
+        <li>
+            <a href="https://www.microsoft.com/edge" target="_blank" rel="noopener noreferrer" title="Baixar Edge">
+                <img alt="Download Edge" src="{{ asset('img/edge.svg') }}">
+                <span class="label">Edge</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.mozilla.org/firefox/new/" target="_blank" rel="noopener noreferrer" title="Baixar Firefox">
+                <img alt="Baixar Firefox" src="{{ asset('img/firefox.svg') }}">
+                <span class="label">Firefox</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.google.com/chrome" target="_blank" rel="noopener noreferrer" title="Baixar Chrome">
+                <img alt="Baixar Firefox" src="{{ asset('img/chrome.svg') }}">
+                <span class="label">Chrome</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://support.apple.com/downloads/safari" target="_blank" rel="noopener noreferrer" title="Baixar Safari">
+                <img alt="Baixar Firefox" src="{{ asset('img/safari.svg') }}">
+                <span class="label">Safari</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.opera.com/download" target="_blank" rel="noopener noreferrer" title="Baixar Opera">
+                <img alt="Baixar Firefox" src="{{ asset('img/opera.svg') }}">
+                <span class="label">Opera</span>
+            </a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,37 @@
+{% set listItem = [] %}
+{% for i in 1..1 %}
+    {% set name = attribute(settings, 'text_category_'~i) %}
+    {% set id = attribute(settings, 'id_category_'~i) %}
+    {% if id %}
+        {% set listItem = listItem|merge([{ "name": name, "id": id }]) %}
+    {% endif %}
+{% endfor %}
+
+{% if listItem %}
+<div class="bg-cat">
+    <div class="container">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">     
+                {% for item in listItem %}
+                <div class="item swiper-slide">
+                    {% set category = Categories({"id": item.id }) %}
+                    <div class="title-section"><span>{{ item.name ? item.name : category.name }}</span></div>
+                    {% set product = Products({
+                        'filter': ['available'],
+                        'limit': 3,
+                        'categories': [item.id],
+                    })
+                    %}
+
+                    {% element 'snippets/product-low' { 
+                        "products": product
+                    } %}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="prev arrow-icon"></div>
+            <div class="next arrow-icon"></div>
+        </div>
+    </div>
+</div>
+{% endif %}

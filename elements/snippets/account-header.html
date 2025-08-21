@@ -1,0 +1,29 @@
+{% if is_mobile is not defined %}
+    {% set is_mobile = false %}
+{% endif %}
+
+<div class="account-header flex align-center">
+
+    <i class="account-icon icon icon-login"></i>
+
+    <span class="login tray-hide" data-logged-user="false">
+
+        {{ settings.text_account ? settings.text_account : 'Entrar / Cadastrar' }}
+
+        {% if is_mobile %}
+            <i class="icon icon-arrow-down v-align-middle"></i>
+        {% endif %}
+
+    </span>
+
+    <span class="logout tray-hide" data-logged-user="true">
+
+        Ol&aacute;, <span data-customer="name"></span>
+
+        {% if is_mobile %}
+            <i class="icon icon-arrow-down v-align-middle"></i>
+        {% endif %}
+
+    </span>
+
+</div>

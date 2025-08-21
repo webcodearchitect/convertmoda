@@ -1,0 +1,57 @@
+{% if categories | length > 0 and settings.show_featured_categories %}
+
+    {% set items = [] %}
+
+    {% for i in 1..12 %}
+
+        {% set position = attribute(settings, 'featured_category_position_'~i) %}
+        {% set id       = attribute(settings, 'featured_category_id_'~i) %}
+
+        {% if id %}
+            {% set items = items | merge({ (position ~ '_') : {
+                "position" : position,
+                "id"       : id
+            }}) %}
+        {% endif %}
+
+    {% endfor %}
+
+    {% set items = items|sort %}
+
+    {% if items | length > 0 %}
+        <div class="categories-line" data-items="{{ items | length }}">
+            <div class="container swiper-carousel">
+
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                         {% for item in items %}
+
+                            {% set category = Categories({ 'id' : item.id }) %}
+
+                            <div class="swiper-slide">
+                                <a class="box-category" href="{{ category.link }}">
+                                    <div class="text">{{ category.name }}</div>
+                                    <div class="box-icon flex align-center justify-center">
+                                        <img class="icon" src="{{ category.images[0] }}" alt="{{ category.name }}">
+                                    </div>
+                                </a>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+                    <div class="dots"></div>
+                </div>
+                <div class="prev">
+                    <i class="icon icon-arrow-left"></i>
+                </div>
+                <div class="next">
+                    <i class="icon icon-arrow-right"></i>
+                </div>
+
+            </div>
+        </div>
+    {% endif %}
+
+{% endif %}
+
+

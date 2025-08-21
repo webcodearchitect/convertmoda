@@ -1,0 +1,53 @@
+{% if settings.show_product_dimensions %}
+<div class="product-measures">
+
+    {% if product.width %}
+        <div class="measure">
+            <i class="icon icon-width"></i>
+            <span class="text">
+                Largura
+            </span>
+            <span class="value">
+                {{ product.width | number_format(2, '.', '') }} cm
+            </span>
+        </div>
+    {% endif %}
+
+    {% if product.height %}
+        <div class="measure">
+            <i class="icon icon-height"></i>
+            <span class="text">
+                Altura
+            </span>
+            <span class="value">
+                {{ product.height | number_format(2, '.', '') }} cm
+            </span>
+        </div>
+    {% endif %}
+
+    {% if product.length %}
+        <div class="measure">
+            <i class="icon icon-depth"></i>
+            <span class="text">
+                Comprimento
+            </span>
+            <span class="value">
+                {{ product.length | number_format(2, '.', '') }} cm
+            </span>
+        </div>
+    {% endif %}
+
+    {% if product.weight %}
+        <div class="measure">
+            <i class="icon icon-weight"></i>
+            <span class="text">
+                Peso
+            </span>
+            <span class="value">
+                {{ product.weight | number_format(2, '.', '') }} g
+            </span>
+        </div>
+    {% endif %}
+
+</div>
+{% endif %}

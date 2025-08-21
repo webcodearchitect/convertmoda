@@ -1,0 +1,139 @@
+<div class="header">
+    <div class="bg">
+        <div class="line flex align-center justify-between container">
+            
+            <svg class="menu" xmlns="http://www.w3.org/2000/svg" width="32.002" height="20.5" viewBox="0 0 32.002 20.5">
+                <path d="M22271,9434.5V9432h29v2.5Zm5-9V9423h18v2.5Zm-8,0V9423h4v2.5Zm3-9V9414h29v2.5Z" transform="translate(-22267.998 -9414.002)" />
+            </svg> 
+
+            <a class="logo" href="{{ store.url }}">
+
+                {% if settings.logo %}
+                    <img src="{{ asset(settings.logo) }}" alt="{{ store.name }}">
+                {% endif %}
+
+                {% if 'home' in pages.current %}
+                    <h1 class="title-store">{{ store.name }}</h1>
+                {% else %}
+                    <div class="title-store">{{ store.name }}</div>
+                {% endif %}
+
+            </a>                       
+            
+            <form class="search-header{{ settings.rastreio or settings.phone ? '' : ' sem-rastreio' }}"  action="{{ links.search }}" method="get" data-search="suggestion">
+                <input type="hidden" name="loja" value="{{ store.id }}">
+                <label class="sr-only" for="input-search-header">O que voc&ecirc; procura?</label>
+                <input class="input-search" id="input-search-header" placeholder="O que voc&ecirc; procura?" spellcheck="false" autocomplete="off" autocorrect="off" data-input="suggestion" type="text"  name="palavra_busca">
+                <button class="button-search" aria-label="Pesquisar">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                        <g transform="translate(0 6)">
+                            <g transform="translate(-3 -5.965)">
+                                <g  transform="translate(3)">
+                                    <path d="M30.188 3.123A13.377 13.377 0 0 0 11.3 21.908L3 30.245l1.714 1.714 8.349-8.288A13.374 13.374 0 1 0 30.188 3.123zm-8.614 21.593A11.319 11.319 0 1 1 32.893 13.4a11.331 11.331 0 0 1-11.319 11.316z" transform="translate(-3 -.023)"/>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+
+                </button>
+            </form>
+
+            <div class="right-options flex align-center justify-between">
+                {% if settings.rastreio or settings.phone %}
+                <div class="account">
+                    {% if settings.header_ic_help and not settings.header_default %}
+                    <img class="icon-user" src="{{ themePath ~ settings.header_ic_help }}?{{ utils.assets_version }}" alt="icon">
+                    {% else %}
+                    <svg class="icon-user" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                        <path d="M0 .315v23.466h17.7l7.9 7.9v-7.9H32V.315H0zm29.867 21.333H25.6v-2.133h-2.133v7.029l-4.9-4.9H2.133V2.448h27.734z" />
+                        <path d="M0 0H9.6V2.133H0z" transform="translate(7.467 8.848)"/>
+                        <path d="M0 0H16V2.133H0z" transform="translate(7.467 13.115)"/>
+                    </svg>                
+                    {% endif %}
+                    <span>{{ settings.text_ajuda ? settings.text_ajuda : 'SAC' }}</span>                
+                    
+                    <div class="modal-white not-width">
+                        <div class="line-options flex">
+                            {% if settings.phone %}
+                            <div class="box-contact">
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                                    <path d="M26.948 12.168v-1.23a11.239 11.239 0 0 0-2.931-7.711A10.11 10.11 0 0 0 16.514 0H15.5A10.11 10.11 0 0 0 8 3.227a11.239 11.239 0 0 0-2.931 7.711v1.23a4.415 4.415 0 0 0-4.114 4.4v1.923a4.41 4.41 0 0 0 4.4 4.4h2.48a.809.809 0 0 0 .807-.807v-9.123a.809.809 0 0 0-.807-.807H6.679v-1.216c0-5.318 3.792-9.324 8.813-9.324h1.015c5.029 0 8.813 4.007 8.813 9.324v1.217h-1.155a.809.809 0 0 0-.807.807v9.116a.809.809 0 0 0 .807.807h1.129c-.329 4.208-3.227 5.183-4.571 5.405a2.837 2.837 0 0 0-2.7-1.956H16.01a2.834 2.834 0 0 0 0 5.667h2.024a2.837 2.837 0 0 0 2.729-2.084 7.631 7.631 0 0 0 2.736-.934 7.121 7.121 0 0 0 3.415-6.1 4.408 4.408 0 0 0 4.134-4.4v-1.925a4.392 4.392 0 0 0-4.1-4.39zm-19.906 9.1H5.368a2.792 2.792 0 0 1-2.79-2.79v-1.92a2.792 2.792 0 0 1 2.79-2.79h1.674zm10.992 9.116H16.01a1.217 1.217 0 0 1 0-2.434h2.024a1.217 1.217 0 0 1 0 2.434zm11.408-11.903a2.792 2.792 0 0 1-2.79 2.79h-1.674v-7.5h1.674a2.792 2.792 0 0 1 2.79 2.79z"/>
+                                </svg>
+                                <div class="title">Precisa de ajuda?</div>
+                                <div class="option">
+                                    <div class="value">Atendimento por Telefone</div>
+                                    {% set tellink = settings.phone | replace({'(': '', ')': '', ' ':'', '-': ''}) %}
+                                    <a href="tel:{{ tellink }}" class="content">{{ settings.phone }}</a>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if settings.rastreio %}
+                                {% element 'snippets/correios' %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div> 
+                {% endif %}
+
+                <div class="account">
+                    {% if settings.header_ic_account and not settings.header_default %}
+                    <img class="icon-user" src="{{ themePath ~ settings.header_ic_account }}?{{ utils.assets_version }}" alt="icon">
+                    {% else %}
+                    <svg class="icon-user" xmlns="http://www.w3.org/2000/svg" width="30" height="32" viewBox="0 0 30 32">
+                        <path transform="translate(0 1)" d="M20.251 19.719A13.441 13.441 0 0 0 23.416 11a8.477 8.477 0 0 0-16.954 0 13.441 13.441 0 0 0 3.155 8.722A14 14 0 0 0 0 26.312l1.611.942a12.141 12.141 0 0 1 10.022-5.9 6.433 6.433 0 0 0 6.593 0A12.245 12.245 0 0 1 28.37 27.48l1.63-.942a14.129 14.129 0 0 0-9.749-6.819zm-5.312.97c-4.427 0-6.782-5.67-6.782-9.692a6.782 6.782 0 1 1 13.564 0c0 4.06-2.355 9.692-6.782 9.692z"/>
+                    </svg>
+                    {% endif %}
+                    <span data-customer="name">{{ settings.text_account ? settings.text_account : 'Minha conta' }}</span>
+                    <div class="modal-white tray-hide" data-logged-user="false">
+                        <a class="link-modal botao-commerce" href="{{ links.login }}">Entrar</a>
+                        <span class="step"><span class="bg">ou</span></span>
+                        <span class="register">Cliente novo?  <a href="{{ links.register }}">Cadastre-se</a></span>
+                    </div>
+                    <div class="modal-white tray-hide" data-logged-user="true">
+                        <a class="link-modal botao-commerce" href="{{ links.central }}">Minha conta</a>
+                        <span class="step"><span class="bg">ou</span></span>
+                        <a class="register" href="{{ links.logout }}">Sair</a>
+                    </div>
+                </div>
+
+                <div class="cart-header">
+                    <div class="area">
+                        {% if settings.header_ic_cart and not settings.header_default %}
+                        <img class="icon" src="{{ themePath ~ settings.header_ic_cart }}?{{ utils.assets_version }}" alt="icon">
+                        {% else %}
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                            <path d="M29.689 6.411h-6.362a7.422 7.422 0 0 0-14.664 0H2.3L0 31.859h32zM2.311 29.738l1.93-21.206h4.337v2.121H10.7V7.26a5.3 5.3 0 0 1 5.3-5.3 5.5 5.5 0 0 1 5.2 4.453h-7.321v2.119H21.3v2.121h2.121V8.532h4.337l1.93 21.206z"/>
+                        </svg>                    
+                        {% endif %}
+                         <span class="number" data-cart="amount" data-moeda="{{ settings.currency }}">0</span>
+                    </div>
+
+                    <div class="cart-sidebar flex flex-column">
+                        <div class="header-cart">Meu carrinho</div>
+                        <div class="content-cart flex-grow flex flex-column justify-between empty">
+                            <div class="list">
+                                <div class="error">
+                                    <div class="text">Carrinho Vazio</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-cart">
+                            <div class="text-info flex align-center justify-end">
+                                <div class="total"><span>Total (valor sem frete):</span> <strong>{{ settings.currency }}</strong> <span class="value"></span></div>
+                            </div>
+                           
+                            <div class="line justify-end">
+                                <a href="{{ links.cart }}" rel="nofollow" class="botao-commerce buy">Fechar pedido</a>
+                            </div>
+                      
+                        </div>
+                    </div>
+                    <div class="shadow-cart-header"></div>
+                </div>
+
+            </div>    
+
+        </div>
+    </div>
+    {% element 'snippets/menu' %}
+</div>

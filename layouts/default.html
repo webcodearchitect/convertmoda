@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-br" class="page-{{ pages.current }}" data-theme-name="{{ settings.theme_name }}" data-theme-version="{{ settings.theme_version }}" data-files="{{ utils.assets_version }}" data-store="{{ store.id }}">
+    <head>
+
+        {# Minified variable is used inside styles.html and scripts.html files and help when developing #}
+        {% set minified = true %}
+
+        {# Tray charset #}
+        {{ html.charset() }}
+
+        <meta name="viewport"              content="width=device-width, initial-scale=1">
+        <meta name="format-detection"      content="telephone=no"/>
+        <meta name="theme-color"           content="{{ settings.color_primary }}">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        {# Tray meta tags #}
+        {{ tray.meta }}
+
+        <link rel="preconnect" href="https://images.tcdn.com.br">
+        <link rel="preconnect" href="https://connect.facebook.net">
+        <link rel="preconnect" href="https://ssl.google-analytics.com">
+
+        {% element 'styles' { minified : minified } %}
+
+        {# Tray analytics and google tag manager #}
+        {{ tray.analytics }}
+        {{ googleTagManager.header(pages.current, tagManagerData) }}
+
+    </head>
+    <body>
+
+        {{ googleTagManager.top(pages.current, tagManagerData) }}
+
+        <div class="application">
+
+            {% element 'snippets/modals' %}
+
+            <div class="wrapper{{ settings.icon_menu_top ? ' menu-icons'}}{{ not settings.header_position or 'product' in pages.current ? ' position-header' }}">
+
+                {% element 'header' %}
+
+                {% if "home" in pages.current %}
+                    {% element 'snippets/banner-home' %}
+                {% endif %}
+
+                {% if ('home' in pages.current) and settings.regua_fio %}
+                    {% element 'snippets/banner_info' %}
+                {% endif %}
+
+                <main class="site-main">
+                    <div class="page-content{{ pages.current in ['catalog', 'home', 'search'] ? ' not-padding' }}">
+
+                        {% if "central" in pages.current %}
+
+                            <div class="container">
+                                <div class="line-panel flex">
+                                    {%  element 'sidebar-central' %}
+                                    <div class="col-panel">
+                                        {{ content_for_layout }}
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% elseif pages.current in ['home', 'product'] %}
+
+                            {{ content_for_layout }}
+
+                        {% else %}
+
+                            {% set special_pages = [
+                                'listas',
+                                'depoimentos-de-clientes',
+                                'noticias'
+                            ] %}
+
+                            {% set title = false %}
+
+                            {% for page in pages.custom %}
+                                {% if pages.current == page.slug and page.slug not in special_pages %}
+                                    {% set title = page.name %}
+                                {% endif %}
+                            {% endfor %}
+
+                            <div class="container {% if title %} is-custom-page {% endif %}">
+
+                                {% if title %}
+                                    <h1 class="page-title">
+                                        {{ title }}
+                                    </h1>
+                                {% endif %}
+
+                                {{ content_for_layout }}
+
+                            </div>
+
+                        {% endif %}
+
+                        {% if pages.current == 'contact' and settings.maps_google %}
+                            <div class="map-iframe board">
+                                {{ settings.maps_google }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </main>
+
+                {% element 'footer' %}
+                {% element 'snippets/messages' %}
+                {% element 'snippets/whatsapp' %}
+
+            </div>
+
+        </div>
+
+        {% if not ('home' in pages.current) %}
+            {% element 'snippets/modal' %}
+        {% endif %}
+
+        {% element 'scripts' { minified : minified } %}
+        {% element 'snippets/pageview' %}
+
+        {{ store.chat }}
+        {{ googleTagManager.bottom(pages.current, tagManagerData) }}
+
+    </body>
+</html>

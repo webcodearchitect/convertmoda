@@ -1,0 +1,52 @@
+{% set extension = minified ? '.min.js' : '.js' %}
+
+{# Scripts Tray #}
+{{ tray.scripts }}
+
+{# Theme scripts #}
+
+{% if 'depoimentos' in pages.current %}
+    <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+{% endif %}
+
+<script>
+    window.theme = {
+        themePath: '{{ themePath }}'
+    }
+</script>
+
+<script src="{{ asset('js/swiper-bundle.min.js' )  }}"></script>
+<script src="{{ asset('js/lazyload.min.js') }}"></script>
+
+<script src="{{ asset('js/js.cookie.min.js') }}"></script>
+
+<script src="{{ asset('js/cart'     ~ extension ) }}"></script>
+<script src="{{ asset('js/default'  ~ extension ) }}"></script>
+
+{% if 'product' in pages.current %}
+    <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+    <script src="{{ asset('js/product' ~ extension ) }}"></script>
+{% endif %}
+
+{% if 'home' in pages.current %}
+    <script async src="{{ asset('js/loadnews' ~ extension) }}"></script>
+{% endif %}
+
+{{
+    html.script({
+        '0' : tray.paths.js ~ 'dist/application.min.js?' ~ utils.assets_version,
+        '1' : tray.paths.js ~ 'init.js?' ~ utils.assets_version
+    })
+}}
+
+{% if pages.current == 'noticia' %}
+    <script async>
+        document.querySelector('.container2 .container2 .board').classList.add('board_htm');
+    </script>
+{% endif %}
+
+<script async type="text/javascript">
+    if(/MSIE \d|Trident.*rv:/.test(navigator.userAgent)){
+        document.write(`<script src="{{ asset('js/navigator' ~ extension) }}"><\/script>`);
+    }
+</script>

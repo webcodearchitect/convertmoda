@@ -1,0 +1,74 @@
+{% set subs_has_children = false %}
+
+{% for sub in subs %}
+    {% if sub.children %}
+        {% set subs_has_children = true %}
+    {% endif %}
+{% endfor %}
+
+{% if not subs_has_children %}
+
+    {% element 'snippets/menu-subcategory' {
+        'category_id' : category_id,
+        'subs'        : subs
+    } %}
+
+{% else %}
+
+    {% set subs_length = subs | length %}
+
+    {% if subs_length < 3 %}
+        {% set columns_class = '' %}
+    {% elseif subs_length < 6 %}
+        {% set columns_class = 'columns-two' %}
+    {% elseif subs_length < 11 %}
+        {% set columns_class = 'columns-three' %}
+    {% else %}
+        {% set columns_class = 'columns-four' %}
+    {% endif %}
+
+    <div class="sub-categories-wrapper with-third-level">
+        <div class="sub-categories with-third-level {% if settings.show_product_in_menu -%} flex has-product {%- endif %}">
+
+            <ul class="sub-list second-level-list {{ columns_class }}">
+                {% for sub in subs %}
+
+                    <li class="second-level">
+                        <a href="{{ sub.link }}">
+                            {{ sub.name }}
+                        </a>
+                        {% if sub.children %}
+
+                            {% if childrens_length < 10 %}
+                                {% set children_columns_class = '' %}
+                            {% elseif childrens_length < 20 %}
+                                {% set children_columns_class = 'columns-two' %}
+                            {% elseif childrens_length < 30 %}
+                                {% set children_columns_class = 'columns-three' %}
+                            {% else %}
+                                {% set children_columns_class = 'columns-four' %}
+                            {% endif %}
+
+                            <ul class="sub-list third-level-list {{ children_columns_class }}">
+                                {% for third_level in sub.children %}
+                                    <li class="third-level">
+                                        <a href="{{ third_level.link }}">
+                                            {{ third_level.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+
+                {% endfor %}
+            </ul>
+
+            {% if settings.show_product_in_menu %}
+                {% element 'snippets/product-category' { 'id' : category_id } %}
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endif %}

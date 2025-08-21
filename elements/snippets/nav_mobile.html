@@ -1,0 +1,129 @@
+<div class="nav-mobile flex flex-column">
+    <div class="header-nav">
+        <div class="line flex align-center">
+            <div class="close-nav">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22.274" height="22.274" viewBox="0 0 22.274 22.274">
+                    <g transform="translate(-284.363 -18.113)">
+                        <g transform="translate(298.152 30.134) rotate(45)" fill="#fff" stroke="#3f303d"
+                            stroke-width="0.4">
+                            <rect width="12" height="2.5" stroke="none" />
+                            <rect x="0.2" y="0.2" width="11.6" height="2.1" fill="none" />
+                        </g>
+                        <g transform="translate(286.131 18.113) rotate(45)" fill="#fff" stroke="#3f303d"
+                            stroke-width="0.4">
+                            <rect width="12" height="2.5" stroke="none" />
+                            <rect x="0.2" y="0.2" width="11.6" height="2.1" fill="none" />
+                        </g>
+                        <g transform="translate(306.637 19.881) rotate(135)" fill="#fff" stroke="#3f303d"
+                            stroke-width="0.4">
+                            <rect width="29" height="2.5" stroke="none" />
+                            <rect x="0.2" y="0.2" width="28.6" height="2.1" fill="none" />
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <a class="logo" href="{{ store.url }}">
+                {% if settings.logo %}<img src="{{ asset(settings.logo_white) }}" alt="{{ store.name }}">
+                {% else %}
+                    <img src="{{ asset('img/convert-tech-white.svg') }}" alt="{{ store.name }}">
+                {% endif %}
+            </a>
+        </div>
+    </div>
+    <form class="search-header" action="{{ links.search }}" method="get" data-search="suggestion">
+        <input type="hidden" name="loja" value="{{ store.id }}">
+        <label class="sr-only" for="input-search-mobile">O que voc&ecirc; procura?</label>
+        <input class="input-search" id="input-search-mobile" placeholder="O que voc&ecirc; procura?" spellcheck="false" autocomplete="off"
+            autocorrect="off" data-input="suggestion" type="text" name="palavra_busca">
+        <button class="button-search" aria-label="Pesquisar">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                <g transform="translate(0 6)">
+                    <g transform="translate(-3 -5.965)">
+                        <g transform="translate(3)">
+                            <path
+                                d="M30.188 3.123A13.377 13.377 0 0 0 11.3 21.908L3 30.245l1.714 1.714 8.349-8.288A13.374 13.374 0 1 0 30.188 3.123zm-8.614 21.593A11.319 11.319 0 1 1 32.893 13.4a11.331 11.331 0 0 1-11.319 11.316z"
+                                transform="translate(-3 -.023)" />
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </button>
+    </form>
+    <div class="content-nav flex-grow">
+        <ul class="list-nav">
+            {% for level1 in categories %}
+            <li>
+                <a href="{{ level1.link }}" class="{{ settings.icon_menu ? 'space' }} {{ level1.children ? 'sub' }}">
+                    {% if level1.images and settings.icon_menu %}
+                    <div class="icon flex align-center justify-center">
+                        <img src="{{ level1.images[0] }}" alt="{{ level1.name }}">
+                    </div>
+                    {% endif %}
+                    <span class="text">{{ level1.name }}</span>
+                    {% if level1.children %}
+                    <svg class="ico" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 284.929 284.929">
+                        <path d="M282.082,76.511l-14.274-14.273c-1.902-1.906-4.093-2.856-6.57-2.856c-2.471,0-4.661,0.95-6.563,2.856L142.466,174.441
+                        L30.262,62.241c-1.903-1.906-4.093-2.856-6.567-2.856c-2.475,0-4.665,0.95-6.567,2.856L2.856,76.515C0.95,78.417,0,80.607,0,83.082
+                        c0,2.473,0.953,4.663,2.856,6.565l133.043,133.046c1.902,1.903,4.093,2.854,6.567,2.854s4.661-0.951,6.562-2.854L282.082,89.647
+                        c1.902-1.903,2.847-4.093,2.847-6.565C284.929,80.607,283.984,78.417,282.082,76.511z" /></svg>
+                    {% endif %}
+                </a>
+                {% if level1.children %}
+                <ul>
+                    <li>
+                        <a href="{{ level1.link }}">Ver categoria</a>
+                    </li>
+                    {% for level2 in level1.children %}
+                    <li>
+                        <a class="{{ level2.children ? 'sub' }}" href="{{ level2.link }}">
+                            {{ level2.name }}
+                            {% if level2.children %}
+                            <svg class="ico" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 284.929 284.929">
+                                <path d="M282.082,76.511l-14.274-14.273c-1.902-1.906-4.093-2.856-6.57-2.856c-2.471,0-4.661,0.95-6.563,2.856L142.466,174.441
+                            L30.262,62.241c-1.903-1.906-4.093-2.856-6.567-2.856c-2.475,0-4.665,0.95-6.567,2.856L2.856,76.515C0.95,78.417,0,80.607,0,83.082
+                            c0,2.473,0.953,4.663,2.856,6.565l133.043,133.046c1.902,1.903,4.093,2.854,6.567,2.854s4.661-0.951,6.562-2.854L282.082,89.647
+                            c1.902-1.903,2.847-4.093,2.847-6.565C284.929,80.607,283.984,78.417,282.082,76.511z" />
+                                </svg>
+                            {% endif %}
+                        </a>
+                        {% if level2.children %}
+                        <ul>
+                            <li>
+                                <a href="{{ level2.link }}">Ver categoria</a>
+                            </li>
+                            {% for level3 in level2.children %}
+                            <li>
+                                <a href="{{ level3.link }}">{{ level3.name }}</a>
+                            </li>
+                            {% endfor %}
+
+                        </ul>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+
+                </ul>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="links">
+        <a href="{{ links.contact }}" class="contato"><svg class="icon-user" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                viewBox="0 0 32 32">
+                <path
+                    d="M0 .315v23.466h17.7l7.9 7.9v-7.9H32V.315H0zm29.867 21.333H25.6v-2.133h-2.133v7.029l-4.9-4.9H2.133V2.448h27.734z">
+                </path>
+                <path d="M0 0H9.6V2.133H0z" transform="translate(7.467 8.848)"></path>
+                <path d="M0 0H16V2.133H0z" transform="translate(7.467 13.115)"></path>
+            </svg>SAC</a>
+        <div class="space"></div>
+        <a href="{{ links.central }}" class="central">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="30" height="32" viewBox="0 0 30 32"><path transform="translate(0 1)" d="M20.251 19.719A13.441 13.441 0 0 0 23.416 11a8.477 8.477 0 0 0-16.954 0 13.441 13.441 0 0 0 3.155 8.722A14 14 0 0 0 0 26.312l1.611.942a12.141 12.141 0 0 1 10.022-5.9 6.433 6.433 0 0 0 6.593 0A12.245 12.245 0 0 1 28.37 27.48l1.63-.942a14.129 14.129 0 0 0-9.749-6.819zm-5.312.97c-4.427 0-6.782-5.67-6.782-9.692a6.782 6.782 0 1 1 13.564 0c0 4.06-2.355 9.692-6.782 9.692z"></path></svg>
+            <span class="account tray-hide" data-logged-user="false">MINHA CONTA</span><span class="tray-hide"
+                data-logged-user="true" data-customer="name"></span>
+        </a>
+    </div>
+</div>

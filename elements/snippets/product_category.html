@@ -1,0 +1,47 @@
+{% set type  = settings.product_type_in_menu  | default('top_seller') %}
+{% set order = settings.product_order_in_menu | default('rand')       %}
+
+{% if type == 'top_seller' %}
+
+    {% set filtered_products = Products({
+        'filter'     : ['available'],
+        'order'      : { 'quantity_sold': 'desc' },
+        'categories' : [id],
+        'limit'      : 1
+    }) %}
+
+{% else %}
+    {% if order == 'rand' %}
+
+        {% set filtered_products = Products({
+            'filter'     : [type, 'available'],
+            'categories' : [id],
+            'limit'      : 1,
+            'order'      : 'rand'
+        }) %}
+
+    {% else %}
+
+        {% set filtered_products = Products({
+            'filter'     : [type, 'available'],
+            'categories' : [id],
+            'limit'      : 1,
+        }) %}
+
+    {% endif %}
+{% endif %}
+
+{% if filtered_products | length == 0 %}
+    {% set filtered_products = Products({
+        'filter'     : ['available'],
+        'categories' : [id],
+        'limit'      : 1,
+        'order'      : 'rand'
+    }) %}
+{% endif %}
+
+<div class="featured-product">
+    {% if filtered_products | length > 0 %}
+        {% element 'snippets/product' { 'product' : filtered_products | first } %}
+    {% endif %}
+</div>

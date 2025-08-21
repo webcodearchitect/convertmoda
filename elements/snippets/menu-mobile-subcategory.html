@@ -1,0 +1,46 @@
+{% if level == 1 %}
+    {% set levelClass = 'list first-level' %}
+{% elseif level == 2 %}
+    {% set levelClass = 'sub-list second-level' %}
+{% else %}
+    {% set levelClass = 'sub-list third-level' %}
+{% endif %}
+
+<ul class="{{ levelClass }}">
+
+    {% for category in categories %}
+        <li {% if category.children %} class="has-sub" {% endif %}>
+
+            <a href="{{ category.link }}">
+
+                {% if category.images and settings.icon_menu and level == 1 %}
+                    <div class="icon flex align-center justify-center">
+                        <img src="{{ category.images[0] }}" alt="{{ category.name }}" />
+                    </div>
+                {% endif %}
+
+                <span class="name">
+                    {{ category.name }}
+                </span>
+
+            </a>
+
+            {% if category.children and level < 3 %}
+                {% element 'snippets/menu-mobile-subcategory' {
+                    'categories' : category.children,
+                    'level'      : level + 1,
+                    'view_all'   : true,
+                    'all_link'   : category.link
+                } %}
+            {% endif %}
+
+        </li>
+    {% endfor %}
+
+    {% if view_all %}
+        <li>
+            <a href="{{ all_link }}">Ver categoria</a>
+        </li>
+    {% endif %}
+
+</ul>

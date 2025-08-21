@@ -1,0 +1,39 @@
+{% if banners.extra2 or banners.extra3 %}
+    <div class="container">
+        <div class="banners-grid flex justify-between {% if(banners.extra2 and banners.extra3) %} two {% endif %}">
+
+            {% if banners.extra2 %}
+                <div class="item">
+
+                    {% set link = banners.extra2.link ? banners.extra2.tracked_link : null %}
+                    {% if link %}
+                        <a href="{{ link }}" {% if banners.extra2.target == '_blank' %} target="_blank" rel="noopener noreferrer" {% endif %}>
+                            <img class="lazyload" src="{{ asset('img/empty.png') }}" data-src="{{ banners.extra2.src }}" alt="{{ banners.extra2.alt }}">
+                        </a>
+                    {% else %}
+                        <img class="lazyload" src="{{ asset('img/empty.png') }}" data-src="{{ banners.extra2.src }}" alt="{{ banners.extra2.alt }}" />
+                    {% endif %}
+
+                </div>
+            {% endif %}
+
+            {% if banners.extra3 %}
+                <div class="item">
+
+                    {% set link = banners.extra3.link ? banners.extra3.tracked_link : null %}
+                    {% if link %}
+                        <a href="{{ link }}" {% if banners.extra3.target == '_blank' %} target="_blank" rel="noopener noreferrer" {% endif %}>
+                            <img class="lazyload" src="{{ asset('img/empty.png') }}" data-src="{{ banners.extra3.src }}" alt="{{ banners.extra3.alt }}">
+                        </a>
+                    {% else %}
+                        <img class="lazyload" src="{{ asset('img/empty.png') }}" data-src="{{ banners.extra3.src }}" alt="{{ banners.extra3.alt }}" />
+                    {% endif %}
+
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endif %}
+
+

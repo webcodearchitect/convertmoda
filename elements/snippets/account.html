@@ -1,0 +1,24 @@
+{% set view  = view | default('desk') %}
+
+{% if view == 'mobile' %}
+
+    {% element 'snippets/account-header' { 'is_mobile' : true } %}
+
+    <div class="panel">
+
+        <div class="back">
+            <i class="icon icon-arrow-left"></i>
+            {% element 'snippets/account-header' %}
+        </div>
+
+        {% element 'snippets/account-body'   %}
+
+    </div>
+
+{% else %}
+
+    {% element 'snippets/account-header' %}
+    {% element 'snippets/account-body' { 'class' : 'account-dropdown' } %}
+
+{% endif %}
+

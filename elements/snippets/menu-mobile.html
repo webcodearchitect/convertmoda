@@ -1,0 +1,44 @@
+<div id="menu-mobile" class="menu-mobile">
+
+    <div class="close-box close-overlay">
+        <i class="icon icon-times"></i>
+    </div>
+
+    <div class="block-title flex align-center">
+        <div class="header-menu">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        Menu
+    </div>
+
+    <div class="nav-mobile-wrapper">
+        <nav class="nav-mobile">
+            {% element 'snippets/menu-mobile-subcategory' {
+                'categories' : categories,
+                'level'      : 1,
+                'view_all'   : false,
+            } %}
+        </nav>
+    </div>
+
+    <div class="account">
+        {% element 'snippets/account' { 'view' : 'mobile' } %}
+    </div>
+
+    <div class="help-block-wrapper">
+
+        <div class="help-block">
+            <i class="icon icon-help"></i>
+            <span>
+                {{ settings.text_help ? settings.text_help : 'Precisa de ajuda?' }}
+                <i class="icon icon-arrow-down v-align-middle"></i>
+            </span>
+        </div>
+
+        {% element 'snippets/help-info' { 'mobile' : true } %}
+
+    </div>
+
+</div>

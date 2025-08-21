@@ -1,0 +1,34 @@
+{% set listMosaic = [] %}
+
+{% for i in 1..5 %}
+    {% set src = attribute(settings, 'banner_mosaic_'~i~'_image') %}
+    {% set link = attribute(settings, 'banner_mosaic_'~i~'_link') %}
+    {% set name = attribute(settings, 'banner_mosaic_'~i~'_name') %}
+    {% set position = attribute(settings, 'banner_mosaic_'~i~'_position') %}
+    {% set target = attribute(settings, 'banner_mosaic_'~i~'_target') %}
+    {% set status = attribute(settings, 'banner_mosaic_'~i~'_status') %}
+    
+
+    {% if src != '' and status %}
+        {% set listMosaic = listMosaic|merge([{"src": src, "link": link, "name": name, "position": position, "target": target }]) %}
+    {% endif %}
+{% endfor %}
+
+
+{% if listMosaic|length %}
+  <h2 class="title-section"><span>produtos com muito amor</span></h2>
+  <div class="mosaic">
+    {% for i in 1..5 %}
+    {% set loopParent = loop.index %}
+        {% for list in listMosaic %}
+            {% if loopParent == list.position %}
+            <div class="item">
+              <a href="{{ list.link }}" target="{{ list.target }}">
+                <img class="lazyload" data-src="{{ asset(list.src) }}" alt="{{ list.name }}">
+              </a>
+            </div>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+{% endif %}

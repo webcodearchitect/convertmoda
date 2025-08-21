@@ -1,0 +1,36 @@
+{% if paginate.params.pageCount > 1 %}
+    <div class="flex align-center justify-center">
+        <div class="paginate-links">
+
+            {% if false %}
+                {{ paginate.first('<<', {'class': 'page-first page-link'}) }}
+            {% endif %}
+
+            {% if paginate.hasPrev %}
+                {% set prevButton %}
+                    {{ paginate.prev('prevText', {'class': 'page-prev page-link'}) }}
+                {% endset %}
+                {{ prevButton | replace({ 'prevText': 'P&aacute;gina anterior' }) }}
+            {% endif %}
+
+            {{ paginate.numbers({
+                'modulus': 3,
+                'separator': '',
+                'class': 'page-link',
+                'currentClass': 'page-current'
+            }) }}
+
+            {% if paginate.hasNext %}
+                {% set nextButton %}
+                    {{ paginate.next('nextText', {'class': 'page-next page-link'}) }}
+                {% endset %}
+                {{ nextButton | replace({ 'nextText': 'Pr&oacute;xima p&aacute;gina' }) }}
+            {% endif %}
+
+            {% if false %}
+                {{ paginate.last('>>', {'class': 'page-last page-link'}) }}
+            {% endif %}
+
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,53 @@
+<p>Detalhes t&eacute;cnicos do produto:</p>
+<table>
+
+    {% if product.reference and settings.show_reference %}
+    <tr>
+        <td>C&oacute;digo</td>
+        <td>{{ product.reference ? product.reference : product.id }}</td>
+    </tr>
+    {% endif %}
+
+    {% if product.ean %}
+        <tr>
+            <td>C&oacute;digo de barras</td>
+            <td>{{ product.ean }}</td>
+        </tr>
+    {% endif %}
+
+    {% if settings.show_product_stock %}
+        <tr>
+            <td>Estoque</td>
+            <td>{{ product.stock }}</td>
+        </tr>
+    {% endif %}
+
+    {% if product.model %}
+        <tr>
+            <td>Modelo</td>
+            <td>{{ product.model }}</td>
+        </tr>
+    {% endif %}
+
+    {% if settings.show_product_brand and product.brand %}
+        <tr>
+            <td>Marca</td>
+            <td>{{ product.brand }}</td>
+        </tr>
+    {% endif %}
+
+    {% if product.included_items %}
+        <tr>
+            <td>Itens Inclusos</td>
+            <td>{{ product.included_items }}</td>
+        </tr>
+    {% endif  %}
+
+    {% if settings.show_product_warranty and product.warranty | length > 0  %}
+    <tr>
+        <td>Garantia</td>
+        <td>{{ product.warranty }}</td>
+    </tr>
+    {% endif  %}
+
+</table>

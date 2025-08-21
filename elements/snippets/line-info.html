@@ -1,0 +1,115 @@
+{% if settings.regua_fio %}
+
+    {% set items = [] %}
+
+    {% for i in 1..5 %}
+
+        {% set position    = attribute(settings, 'icon_'~i~'_position'     ) %}
+        {% set title       = attribute(settings, 'linha_fio_title_'~i      ) %}
+        {% set icon        = attribute(settings, 'linha_fio_icon_'~i       ) %}
+        {% set description = attribute(settings, 'linha_fio_description_'~i) %}
+
+        {% if title %}
+            {% set items = items | merge({ (position ~ '_') : {
+                "position"    : position,
+                "title"       : title,
+                "icon"        : icon,
+                "description" : description
+            }}) %}
+        {% endif %}
+
+    {% endfor %}
+
+    {% set items = items|sort %}
+
+
+    <div class="line-info">
+        <div class="container">
+            <div class="slide swiper-container ">
+                <div class="swiper-wrapper flex justify-between">
+
+                    {% for item in items %}
+                        <div class="swiper-slide item flex justify-center align-center">
+
+                            {% if item.icon %}
+                                <i class="icon icon-{{ item.icon }}"></i>
+                            {% endif %}
+
+                            <span class="text">
+                                <span class="featured">{{ item.title }}</span>
+                                {{ item.description }}
+                            </span>
+
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <div class="prev">
+                    <i class="icon icon-arrow-left"></i>
+                </div>
+                <div class="next">
+                    <i class="icon icon-arrow-right"></i>
+                </div>
+                <div class="dots"></div>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+
+{#  <!-- Esse bloco deve ser deixado como ativo quando estiver com o novo editor -->
+
+    {% if settings.regua_fio %}
+
+        {% set items = [] %}
+
+        <div class="line-info">
+            <div class="container">
+                <div class="slide swiper-container ">
+                    <div class="swiper-wrapper flex justify-between">
+
+                        {% for i in 1..5 %}
+
+                            {% set title       = attribute(settings, 'linha_fio_title_'~i      ) %}
+                            {% set icon        = attribute(settings, 'linha_fio_icon_'~i       ) %}
+                            {% set description = attribute(settings, 'linha_fio_description_'~i) %}
+
+                            {% if title %}
+                            
+                                {% set items = {
+                                    "title"       : title,
+                                    "icon"        : icon,
+                                    "description" : description
+                                } %}
+
+                                <div class="swiper-slide item flex justify-center align-center">
+
+                                    {% if items.icon %}
+                                        <i class="icon icon-{{ items.icon }}"></i>
+                                    {% endif %}
+
+                                    <span class="text">
+                                        <span class="featured">{{ items.title }}</span>
+                                        {{ items.description }}
+                                    </span>
+
+                                </div>
+                            {% endif %}
+
+                        {% endfor %}
+
+                    </div>
+                    <div class="prev">
+                        <i class="icon icon-arrow-left"></i>
+                    </div>
+                    <div class="next">
+                        <i class="icon icon-arrow-right"></i>
+                    </div>
+                    <div class="dots"></div>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+
+#}

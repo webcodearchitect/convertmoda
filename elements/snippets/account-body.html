@@ -1,0 +1,25 @@
+<div class="tray-hide {{ class }}" data-logged-user="false">
+    <a class="action-button" href="{{ links.login }}">
+        Entrar
+        <i class="icon icon-arrow-right v-align-middle"></i>
+    </a>
+    <span class="divider">
+        <span class="text">ou</span>
+    </span>
+    <a class="action" href="{{ links.register }}">
+        Cliente novo? Cadastre-se
+    </a>
+</div>
+
+<div class="tray-hide {{ class }}" data-logged-user="true">
+    <a class="action-button" href="{{ links.central }}">
+        Minha conta
+        <i class="icon icon-arrow-right v-align-middle"></i>
+    </a>
+    <span class="divider">
+            <span class="text">ou</span>
+        </span>
+    <a class="action" href="{{ links.logout }}">
+        Sair
+    </a>
+</div>

@@ -1,0 +1,8 @@
+<form class="header-search-wrapper" action="{{ links.search }}" method="get" data-search="suggestion">
+    <input type="hidden" name="loja" value="{{ store.id }}">
+    <input class="input-search" placeholder="O que voc&ecirc; procura?" spellcheck="false" autocomplete="off" data-input="suggestion" type="text"  name="palavra_busca">
+    <button class="button-search">
+        <i class="icon icon-search"></i>
+    </button>
+    <div class="suggestion is-hidden" data-container="suggestion"></div>
+</form>

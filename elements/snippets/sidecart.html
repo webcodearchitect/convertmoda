@@ -1,0 +1,56 @@
+<div id="sidecart" class="sidecart" data-show-after-loading="{% if settings.show_cart_after_adding_product -%} true {%- else -%} false {%- endif %}" >
+
+    <div class="cart-loader loader">
+        <div class="spinner">
+            <div class="double-bounce-one"></div>
+            <div class="double-bounce-two"></div>
+        </div>
+        <div class="message">Atualizando carrinho ...</div>
+    </div>
+
+    <div class="close-box close-overlay">
+        <i class="icon icon-times"></i>
+    </div>
+
+    <div class="cart-empty">
+        <i class="icon icon-cart"></i>
+        <span class="empty-title">
+            Seu carrinho est&aacute; vazio...
+        </span>
+        <span class="empty-message">
+            Ao adicionar produtos ao carrinho eles aparecer&atilde;o aqui :)
+        </span>
+    </div>
+
+    <div class="cart-header flex align-center">
+        <i class="icon icon-cart"></i>
+        Carrinho de compras
+    </div>
+
+    <div class="cart-products-wrapper">
+        <div class="cart-products"></div>
+    </div>
+
+    <div class="cart-footer">
+
+        <div class="subtotal">
+            <span class="label">Subtotal:</span>
+            <span class="price"></span>
+        </div>
+
+        <div class="message">
+            * Descontos e frete ser&atilde;o calculados na p&aacute;gina de finaliza&ccedil;&atilde;o.
+        </div>
+
+        
+        <a class="action-button" href="{{ links.cart }}">Comprar Agora</a>
+
+        <a class="action close-overlay" href="javascript:void(0)">
+            <i class="icon icon-arrow-left"></i>
+            Continuar Comprando
+        </a>
+       
+    </div>
+
+</div>
+

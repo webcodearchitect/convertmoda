@@ -1,0 +1,135 @@
+<style>
+    html{
+
+        {# Font #}
+        --font_family                               : '{{ settings.font_family }}', sans-serif;
+
+        {# General #}
+        --color_store_bg                            : {{ settings.color_store_bg                         }};
+        --color_text                                : {{ settings.color_text                             }};
+        --color_titles                              : {{ settings.color_titles                           }};
+        --color_subtitles                           : {{ settings.color_subtitles                        }};
+        --color_primary                             : {{ settings.color_primary                          }};
+        --color_primary_hover                       : {{ settings.color_primary_hover                    }};
+        --color_primary_text                        : {{ settings.color_primary_text                     }};
+        --color_slide_dots_bg                       : {{ settings.color_slide_dots_bg                    }};
+        --color_slide_dots_active_bg                : {{ settings.color_slide_dots_active_bg             }};
+        --color_input_bg                            : {{ settings.color_input_bg                         }};
+        --color_input_text                          : {{ settings.color_input_text                       }};
+        --color_input_border                        : {{ settings.color_input_border                     }};
+        --color_checkbox_border                     : {{ settings.color_checkbox_border                  }};
+        --color_border                              : {{ settings.color_border                           }};
+        --color_modal_bg                            : {{ settings.color_modal_bg                         }};
+
+        {# Top bar colors #}
+        --color_top_bar_bg                          : {{ settings.color_top_bar_bg                       }};
+        --color_top_bar_text                        : {{ settings.color_top_bar_text                     }};
+
+        {# Header colors #}
+        --color_header_bg                           : {{ settings.color_header_bg                        }};
+        --color_header_icon_text                    : {{ settings.color_header_icon_text                 }};
+        --color_header_text                         : {{ settings.color_header_text                      }};
+        --color_header_hover_text                   : {{ settings.color_header_hover_text                }};
+        --color_header_cart_number_bg               : {{ settings.color_header_cart_number_bg            }};
+        --color_header_cart_number_text             : {{ settings.color_header_cart_number_text          }};
+        --color_header_nav_bg                       : {{ settings.color_header_nav_bg                    }};
+        --color_header_nav_text                     : {{ settings.color_header_nav_text                  }};
+        --color_header_nav_sub_bg                   : {{ settings.color_header_nav_sub_bg                }};
+        --color_header_nav_sub_text                 : {{ settings.color_header_nav_sub_text              }};
+        --color_header_nav_sub_hover_text           : {{ settings.color_header_nav_sub_hover_text        }};
+        --color_header_nav_bottom_border            : {{ settings.color_header_nav_bottom_border         }};
+        --color_header_nav_sub_main_text            : {{ settings.color_header_nav_sub_main_text         }};
+
+        {# Account menu colors #}
+        --color_account_menu_bg                     : {{ settings.color_account_menu_bg                  }};
+        --color_account_menu_text                   : {{ settings.color_account_menu_text                }};
+        --color_account_menu_button_bg              : {{ settings.color_account_menu_button_bg           }};
+        --color_account_menu_button_hover_bg        : {{ settings.color_account_menu_button_hover_bg     }};
+        --color_account_menu_button_text            : {{ settings.color_account_menu_button_text         }};
+        --color_account_menu_button_hover_text      : {{ settings.color_account_menu_button_hover_text   }};
+
+        {# Banner Home colors #}
+        --color_banner_home_slide_dots_bg           : {{ settings.color_banner_home_slide_dots_bg        }};
+        --color_banner_home_slide_dots_active_bg    : {{ settings.color_banner_home_slide_dots_active_bg }};
+
+        {# Sidecart colors #}
+        --color_sidecart_bought_together_bg         : {{ settings.color_sidecart_bought_together_bg      }};
+        --color_sidecart_bought_together_text       : {{ settings.color_sidecart_bought_together_text    }};
+
+        {# Line Info colors #}
+        --color_line_info_bg                        : {{ settings.color_line_info_bg                     }};
+        --color_line_info_first_text                : {{ settings.color_line_info_first_text             }};
+        --color_line_info_second_text               : {{ settings.color_line_info_second_text            }};
+
+        {# Categories Line colors #}
+        --color_categories_line_item_bg             : {{ settings.color_categories_line_item_bg          }};
+        --color_categories_line_item_text           : {{ settings.color_categories_line_item_text        }};
+        --color_categories_line_item_detail_bg      : {{ settings.color_categories_line_item_detail_bg   }};
+
+        {# Product Box colors #}
+        --color_product_box_text                    : {{ settings.color_product_box_text                 }};
+        --color_price_text                          : {{ settings.color_price_text                       }};
+        --color_payment_text                        : {{ settings.color_payment_text                     }};
+        --color_product_box_bg                      : {{ settings.color_product_box_bg                   }};
+        --color_product_button_listing_bg           : {{ settings.color_product_button_listing_bg        }};
+        --color_product_button_listing_hover_bg     : {{ settings.color_product_button_listing_hover_bg  }};
+        --color_product_button_listing_text         : {{ settings.color_product_button_listing_text      }};
+        --color_quantity_buttons_bg                 : {{ settings.color_quantity_buttons_bg              }};
+        --color_quantity_buttons_hover_bg           : {{ settings.color_quantity_buttons_hover_bg        }};
+        --color_quantity_arrows_text                : {{ settings.color_quantity_arrows_text             }};
+        --color_featured_tag_bg                     : {{ settings.color_featured_tag_bg                  }};
+        --color_featured_tag_text                   : {{ settings.color_featured_tag_text                }};
+        --color_discount_tag_bg                     : {{ settings.color_discount_tag_bg                  }};
+        --color_discount_tag_text                   : {{ settings.color_discount_tag_text                }};
+        --color_free_shipping_tag_bg                : {{ settings.color_free_shipping_tag_bg             }};
+        --color_free_shipping_tag_text              : {{ settings.color_free_shipping_tag_text           }};
+        --color_new_tag_bg                          : {{ settings.color_new_tag_bg                       }};
+        --color_new_tag_text                        : {{ settings.color_new_tag_text                     }};
+        --color_extra_tag_bg                        : {{ settings.color_extra_tag_bg                     }};
+        --color_extra_tag_text                      : {{ settings.color_extra_tag_text                   }};
+        --color_filters_sidebar_bg                  : {{ settings.color_filters_sidebar_bg               }};
+        --color_filters_sidebar_border              : {{ settings.color_filters_sidebar_border           }};
+
+        {# Product Page colors #}
+        --color_product_name_text                   : {{ settings.color_product_name_text                }};
+        --color_variants_product_page_text          : {{ settings.color_variants_product_page_text       }};
+        --color_price_product_page_text             : {{ settings.color_price_product_page_text          }};
+        --color_payment_product_page_text           : {{ settings.color_payment_product_page_text        }};
+        --color_buy_button_bg                       : {{ settings.color_buy_button_bg                    }};
+        --color_buy_button_hover_bg                 : {{ settings.color_buy_button_hover_bg              }};
+        --color_buy_button_text                     : {{ settings.color_buy_button_text                  }};
+
+        {# Brand colors #}
+        --color_brands_bg                           : {{ settings.color_brands_bg                        }};
+        --color_brands_item_bg                      : {{ settings.color_brands_item_bg                   }};
+
+        {# Review colors #}
+        --color_review_bg                           : {{ settings.color_review_bg                        }};
+        --color_review_text                         : {{ settings.color_review_text                      }};
+        --color_review_section_mobile_bg            : {{ settings.color_review_section_mobile_bg         }};
+
+        {# Blog colors #}
+        --color_blog_bg                             : {{ settings.color_blog_bg                          }};
+        --color_blog_title_text                     : {{ settings.color_blog_title_text                  }};
+        --color_blog_description_text               : {{ settings.color_blog_description_text            }};
+
+        {# Footer colors #}
+        --color_footer_bg                           : {{ settings.color_footer_bg                        }};
+        --color_footer_border                       : {{ settings.color_footer_border                    }};
+        --color_footer_text                         : {{ settings.color_footer_text                      }};
+        --color_footer_highlight                    : {{ settings.color_footer_highlight                 }};
+        --color_footer_highlight_hover              : {{ settings.color_footer_highlight_hover           }};
+        --color_footer_highlight_text               : {{ settings.color_footer_highlight_text            }};
+        --color_footer_newsletter_input_bg          : {{ settings.color_footer_newsletter_input_bg       }};
+        --color_footer_newsletter_input_text        : {{ settings.color_footer_newsletter_input_text     }};
+
+        {# Newsletter popup #}
+        --bg_popup_news                             : {{ settings.bg_popup_news                          }};
+        --text_popup_news                           : {{ settings.text_popup_news                        }};
+
+        {# Images and icons #}
+        --arrow_select                              : url("data:image/svg+xml,%3Csvg fill='%23{{ settings.text_input|replace({'#': ''}) }}' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 284.929 284.929'%3E%3Cpath d='M282.082,76.511l-14.274-14.273c-1.902-1.906-4.093-2.856-6.57-2.856c-2.471,0-4.661,0.95-6.563,2.856L142.466,174.441 L30.262,62.241c-1.903-1.906-4.093-2.856-6.567-2.856c-2.475,0-4.665,0.95-6.567,2.856L2.856,76.515C0.95,78.417,0,80.607,0,83.082 c0,2.473,0.953,4.663,2.856,6.565l133.043,133.046c1.902,1.903,4.093,2.854,6.567,2.854s4.661-0.951,6.562-2.854L282.082,89.647 c1.902-1.903,2.847-4.093,2.847-6.565C284.929,80.607,283.984,78.417,282.082,76.511z' /%3E%3C/svg%3E%0A");
+
+    }
+</style>
+

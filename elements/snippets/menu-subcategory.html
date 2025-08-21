@@ -1,0 +1,35 @@
+{% if more_categories is not defined %}
+    {% set more_categories = false %}
+{% endif %}
+
+{% set subs_length = subs | length %}
+
+{% if subs_length < 10 %}
+    {% set columns_class = '' %}
+{% elseif subs_length < 20 %}
+    {% set columns_class = 'columns-two' %}
+{% elseif subs_length < 30 %}
+    {% set columns_class = 'columns-three' %}
+{% else %}
+    {% set columns_class = 'columns-four' %}
+{% endif %}
+
+<div class="sub-categories-wrapper">
+    <div class="sub-categories {% if settings.show_product_in_menu and not more_categories %} flex has-product {% endif %}">
+
+        <ul class="sub-list second-level-list {{ columns_class }}">
+            {% for sub in subs %}
+                <li class="second-level">
+                    <a href="{{ sub.link }}">
+                        {{ sub.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% if settings.show_product_in_menu and not more_categories %}
+            {% element 'snippets/product-category' { 'id' : category_id } %}
+        {% endif %}
+
+    </div>
+</div>

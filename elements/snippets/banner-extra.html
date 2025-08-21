@@ -1,0 +1,34 @@
+{% set banners_list = attribute(banners, 'extra' ~ position) %}
+{% set is_slide = false %}
+
+{% if banners_list %}
+
+    {% set banner_extra = [] %}
+
+    {% if banners_list.slides %}
+
+        {% set is_slide = true %}
+
+        {% for banner in banners_list.slides %}
+            {% set banner_extra = banner_extra | merge([ banner ]) %}
+        {% endfor %}
+
+    {% else %}
+        {% set banner_extra = [bannerList] %}
+    {% endif %}
+
+    <div class="section-banners-center" data-length="{{ banner_extra | length }}">
+        {% for banner in banner_extra %}
+
+            {% set link = banner.link ? (is_slide ? banner.link : banner.tracked_link) : null  %}
+
+            <div class="item">
+                <a {% if link %} href="{{ link }}" target="{{ banner.target }}" {% endif %} style="padding-bottom: {{ (banner.height / banner.width) * 100 }}%;">
+                    <img class="lazyload" data-src="{{ banner.image }}" alt="{{ banner.label | default('Banner central ' ~ loop.index) }}">
+                </a>
+            </div>
+
+        {% endfor %}
+    </div>
+
+{% endif %}

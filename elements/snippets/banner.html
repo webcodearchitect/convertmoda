@@ -1,0 +1,15 @@
+{% if b %}
+    {% set item = {
+        'link': b.link,
+        'src': b.image ? b.image : b.src,
+        'alt': b.label ? b.label : b.alt,
+        'target': b.target,
+        'width': b.width,
+        'height': b.height
+    } %}
+    
+    <{{ item.link ? 'a href="'~item.link~'" target="'~item.target~'"' : 'span' }}{% if not padding %} class="item-image" style="--padding: {{ (item.height / item.width) * 100 }}%"{% endif %}>
+    {% set swiper = swiperLazy ? 'swiper-lazy' : 'lazyload' %}
+    <img {{ lazy or swiperLazy ? 'class="'~swiper~'" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKAQMAAAC3/F3+AAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjwAsAAB4AAdpxxYoAAAAASUVORK5CYII=" data-'}}src="{{ item.src }}" alt="{{ item.alt ? 'Banner' : item.alt }}">
+    </{{ item.link ? 'a' : 'span' }}>
+{% endif %}

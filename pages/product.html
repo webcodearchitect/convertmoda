@@ -1,0 +1,559 @@
+{% if ProgressiveDiscounts %}
+    <div class="container">
+        <div class="progressive-discount-banners">
+            {% for discount in ProgressiveDiscounts %}
+                {% if discount.banner %}
+                    <img src="{{ discount.banner }}" alt="{{ discount.name }}"/>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+<div class="container">
+    <div id="product-container" class="produto-wrapper product-detail product-page">
+
+        {% element 'schema' { "product": product } %}
+
+        <div class="clearfix">
+
+            {% element 'snippets/breadcrumb' { "class": 'breadcrumb'} %}
+
+            <div class="box-col-product flex">
+                <div class="product-colum-left">
+
+                    <div class="gallery f-wrap">
+
+                        {% if product.video %}
+                            <div class="video-button" data-url="{{ product.video }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 314.068 314.068">
+                                    <path d="M293.002,78.53C249.646,3.435,153.618-22.296,78.529,21.068C3.434,64.418-22.298,160.442,21.066,235.534 c43.35,75.095,139.375,100.83,214.465,57.47C310.627,249.639,336.371,153.62,293.002,78.53z M219.834,265.801     c-60.067,34.692-136.894,14.106-171.576-45.973C13.568,159.761,34.161,82.935,94.23,48.26     c60.071-34.69,136.894-14.106,171.578,45.971C300.493,154.307,279.906,231.117,219.834,265.801z M213.555,150.652l-82.214-47.949 c-7.492-4.374-13.535-0.877-13.493,7.789l0.421,95.174c0.038,8.664,6.155,12.191,13.669,7.851l81.585-47.103 C221.029,162.082,221.045,155.026,213.555,150.652z"></path>
+                                </svg>
+                                <span>V&Iacute;DEO</span>
+                            </div>
+                        {% endif %}
+
+                        <div class="gallery-thumbs">
+
+                            <div class="swiper-container swiper-container-vertical nav-swiper">
+                                <div class="swiper-wrapper">
+                                    {% for image in product.images %}
+                                        <div class="swiper-slide" data-index="{{ loop.index0 }}">
+                                            <div class="thumb">
+                                                <img class="swiper-lazy" data-src="{{ image.large }}" alt="{{ image.alt | default(product.name ~ ' #' ~ loop.index) }}">
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="product-next swiper-button-disabled"></div>
+                            <div class="product-prev swiper-button-disabled"></div>
+
+                        </div>
+
+                        <div class="swiper-container featured-swiper swiper-container-horizontal">
+
+                            <div class="click-to-zoom">
+                                <span class="info">Clique para expandir</span>
+                                <div class="zoom-icon"></div>
+                            </div>
+
+                            <div class="swiper-wrapper">
+                                {% for image in product.images %}
+                                    <div class="swiper-slide" data-index="{{ loop.index0 }}">
+                                        <img class="swiper-lazy" data-src="{{ image.full }}" alt="{{ image.alt | default(product.name ~ ' #' ~ loop.index) }}">
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="product-mob-next swiper-button-disabled"></div>
+                            <div class="product-mob-prev swiper-button-disabled"></div>
+
+                            <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+                                {% for dot in product.images %}
+                                    <span class="swiper-pagination-bullet {% if loop.first %} swiper-pagination-bullet-active {% endif %}" tabindex="0" role="button" aria-label="Go to slide {{ loop.index }}"></span>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    {% if product.images %}
+                        <div class="fixed-modal">
+
+                            <div aria-label="shadow modal" class="shad"></div>
+                            <button class="exit" aria-label="Close modal"></button>
+
+                            <div class="slide-fixed swiper-container">
+                                <div class="swiper-wrapper">
+                                    {% for image in product.images %}
+                                        <div class="swiper-slide item">
+                                            <img class="swiper-lazy" data-src="{{ image.full }}">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="fixed-next arrow-swip next"></div>
+                                <div class="fixed-prev arrow-swip prev"></div>
+                            </div>
+
+                        </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="product-colum-right">
+                    <div class="relative-area">
+                        <div class="fixed-info">
+
+                            <div id="loading-product-container" class="load-css">
+                                <div class="icon"></div>
+                            </div>
+
+                            {% set add = product.additional_button and Image('additional_button') ? true : false %}
+                            {% set firstProgressiveDiscount = ProgressiveDiscounts | first %}
+
+                            {% if product.featured or product.new or product.free_shipping or product.price_offer or add or firstProgressiveDiscount %}
+                                <div class="list-seal-product flex f-wrap">
+
+                                    {% if product.featured %}
+                                        <div class="tag featured">
+                                            Destaque
+                                        </div>
+                                    {% endif %}
+
+                                    {% if product.new %}
+                                        <div class="tag new">
+                                            Lan&ccedil;amento
+                                        </div>
+                                    {% endif %}
+
+                                    {% if product.free_shipping %}
+                                        <div class="tag shipping">
+                                            Frete gr&aacute;tis
+                                        </div>
+                                    {% endif %}
+
+                                    {% if firstProgressiveDiscount %}
+                                        <div class="tag discount">
+                                            {{ firstProgressiveDiscount.tag }}
+                                        </div>
+                                    {% endif %}
+
+                                    {% if product.price_offer %}
+                                        {% set porcentagemDesconto = 100 - ( product.price_offer / product.price ) * 100 %}
+                                        {% if porcentagemDesconto > 0 and porcentagemDesconto < 100 %}
+                                            <div class="tag discount">
+                                                {{ porcentagemDesconto | number_format }}% OFF
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+
+                                    {% if add %}
+                                        <div class="image-add">
+                                            {{ Image('additional_button') }}
+                                        </div>
+                                    {% endif %}
+
+                                </div>
+                            {% endif %}
+
+                            <h1 class="product-name">
+                                {{ product.name }}
+                            </h1>
+
+                            <div class="line-info flex">
+
+                                {% if settings.star_list %}
+                                    <div class="list-star flex cursor">
+                                        {% element 'snippets/ranking' {
+                                            'review': product.ranking,
+                                            'total' : true
+                                        } %}
+                                    </div>
+                                {% endif %}
+
+                                {% if product.reference and settings.show_reference %}
+                                    <span class="ref">
+                                        (C&oacute;d.: {{ product.reference }})
+                                    </span>
+                                {% endif %}
+
+                            </div>
+
+                            {% if productHelper.banner() %}
+                                <div class="product-lote">
+                                    {{ productHelper.banner() }}
+                                </div>
+                            {% endif %}
+
+                            {% if  productHelper.icons() and settings.ficha %}
+                                <div class="list-icons">
+                                    {{ productHelper.icons() }}
+                                </div>
+                            {% endif %}
+
+                            {% if (product.release_date and product.release_date != '0000-00-00') or (product.availability and product.availability | length > 0) or product.additional_message %}
+                                <div class="extra-information">
+
+                                    {%set productDetails = productHelper.details() %}
+                                        {% if 'class="dados-campo infoLancamento"' in productDetails %}
+                                        <div class="info-product">
+                                            <strong>Data de lan&ccedil;amento:</strong> {{ product.release_date | date('d/m/Y') }}
+                                        </div>
+                                    {% endif %}
+
+                                    {% if product.availability and product.availability | length > 0 %}
+                                        <div class="info-product">
+                                            <strong>Disponibilidade:</strong> {{ product.availability }}
+                                        </div>
+                                    {% endif %}
+
+                                    {% if product.additional_message %}
+                                        <div class="info-product">
+                                            {{ product.additional_message }}
+                                        </div>
+                                    {% endif %}
+
+                                </div>
+                            {% endif %}
+
+                            {% if productHelper.bonus() %}
+                                {{ productHelper.bonus() }}
+                            {% endif %}
+
+                            {{ productHelper.pricing() }}
+
+                            {% if ProgressiveDiscounts %}
+                                <div class="product-progressive-discount">
+                                    <div class="title">
+                                        Produto com desconto progressivo
+                                        <div class="tooltip">
+                                            <svg class="icon-help" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+                                                <g>
+                                                    <circle cx="1.367" cy="1.367" r="1.367" transform="translate(12.633 19.332)"/>
+                                                    <path d="M14 0a14 14 0 1014 14A13.992 13.992 0 0014 0zm0 25.813A11.813 11.813 0 1125.813 14 11.806 11.806 0 0114 25.813z"/>
+                                                    <path d="M14 7.027A4.38 4.38 0 009.625 11.4a1.094 1.094 0 002.188 0A2.188 2.188 0 1114 13.59a1.094 1.094 0 00-1.094 1.094v2.734a1.094 1.094 0 002.188 0v-1.779A4.375 4.375 0 0014 7.027z"/>
+                                                </g>
+                                            </svg>
+                                            <div class="tooltip-content">
+                                                Somente o maior desconto ser&aacute; aplicado no checkout.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="discounts {% if ProgressiveDiscounts | length == 1 %} text-center {% endif %}">
+                                        {% for discount in ProgressiveDiscounts %}
+                                            <li class="discount" data-name="{{ discount.name }}">
+                                                {{ discount.description }}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+
+                            {% set is_available = product.available and (product.stock > 0 or settings.without_stock_sale) and not product.upon_request %}
+
+                            <form id="form_comprar" class="{% if not is_available %} unavailable {% endif %} {% if product.is_kit %} is-kit {% endif %}"  method="post" data-app="product.buy-form" data-id="{{ product.id }}" action="{{ links.cart_add ~ product.id }}">
+                                <div style="display: none" class="value-max-stock" data-variant="{{ product.has_variation }}">{{ product.stock }}</div>
+
+                                {% if productHelper.variants() %}
+                                    <div class="box-variants">
+                                        {{ productHelper.variants() }}
+                                    </div>
+                                {% endif %}
+
+                                {{ productHelper.gifts() }}
+
+                                {{ product.additional_information }}
+                                {{ productHelper.kit() }}
+
+                                {% if (product.stock > 0 or settings.without_stock_sale) and not product.upon_request %}
+                                    <div class="box-price">
+
+                                        {{ productHelper.form() }}
+
+                                        <div class="increment-page">
+                                            <div class="increment low">
+                                                <div class="icon"></div>
+                                            </div>
+                                            <div class="increment add">
+                                                <div class="icon"></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                {% endif %}
+
+                                {% if not product.upon_request and product.available and productHelper.wishlist() %}
+                                    <div class="wishlist">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -28 512.001 512" width="20" height="20">
+                                            <path d="m256 455.515625c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085937-40.625-35.082031-58.21875-50.074219l-.089843-.078125c-51.582032-43.957031-96.125-81.917969-127.117188-119.3125-34.644531-41.804687-50.78125-81.441406-50.78125-124.742187 0-42.070313 14.425781-80.882813 40.617188-109.292969 26.503906-28.746094 62.871093-44.578125 102.414062-44.578125 29.554688 0 56.621094 9.34375 80.445312 27.769531 12.023438 9.300781 22.921876 20.683594 32.523438 33.960938 9.605469-13.277344 20.5-24.660157 32.527344-33.960938 23.824218-18.425781 50.890625-27.769531 80.445312-27.769531 39.539063 0 75.910156 15.832031 102.414063 44.578125 26.191406 28.410156 40.613281 67.222656 40.613281 109.292969 0 43.300781-16.132812 82.9375-50.777344 124.738281-30.992187 37.398437-75.53125 75.355469-127.105468 119.308594-17.625 15.015625-37.597657 32.039062-58.328126 50.167969-5.472656 4.789062-12.503906 7.429687-19.789062 7.429687zm-112.96875-425.523437c-31.066406 0-59.605469 12.398437-80.367188 34.914062-21.070312 22.855469-32.675781 54.449219-32.675781 88.964844 0 36.417968 13.535157 68.988281 43.882813 105.605468 29.332031 35.394532 72.960937 72.574219 123.476562 115.625l.09375.078126c17.660156 15.050781 37.679688 32.113281 58.515625 50.332031 20.960938-18.253907 41.011719-35.34375 58.707031-50.417969 50.511719-43.050781 94.136719-80.222656 123.46875-115.617188 30.34375-36.617187 43.878907-69.1875 43.878907-105.605468 0-34.515625-11.605469-66.109375-32.675781-88.964844-20.757813-22.515625-49.300782-34.914062-80.363282-34.914062-22.757812 0-43.652344 7.234374-62.101562 21.5-16.441406 12.71875-27.894532 28.796874-34.609375 40.046874-3.453125 5.785157-9.53125 9.238282-16.261719 9.238282s-12.808594-3.453125-16.261719-9.238282c-6.710937-11.25-18.164062-27.328124-34.609375-40.046874-18.449218-14.265626-39.34375-21.5-62.097656-21.5zm0 0"/>
+                                        </svg>
+                                        {{ productHelper.wishlist() }}
+                                    </div>
+                                {% endif %}
+
+<!-- Botão Comprar pelo WhatsApp -->
+<div style="text-align: center; margin-top: 10px;">
+  <a id="whatsappButton" 
+     href="#" 
+     target="_blank" 
+     style="
+         display: inline-flex;
+         align-items: center;
+         justify-content: center;
+         background-color: #25D366;
+         color: white;
+         padding: 10px 18px;
+         font-size: 16px;
+         border-radius: 0;
+         text-decoration: none;
+         font-family: Arial, sans-serif;
+         font-weight: bold;
+         width: 80%;
+         max-width: 400px;
+         box-sizing: border-box;
+     ">
+     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+          alt="WhatsApp" 
+          style="width:22px; height:22px; margin-right:8px;">
+     Comprar pelo WhatsApp
+  </a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const whatsappNumber = '5551982546692';
+  const productNameElement = document.querySelector('h1.product-name');
+
+  if (productNameElement) {
+    const productName = productNameElement.innerText.trim();
+    const message = `Olá, gostaria de comprar o produto: ${productName}`;
+    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    document.getElementById('whatsappButton').href = whatsappLink;
+  }
+});
+</script>
+
+<style>
+/* Responsividade para o botão do WhatsApp */
+@media (max-width: 768px) {
+  #whatsappButton {
+    width: 90%;
+    font-size: 15px;
+  }
+}
+</style>
+
+
+                            </form>
+
+                            {% if productHelper.shipping() and not product.upon_request %}
+                                <div class="box-frete">
+
+                                    {{ productHelper.shipping() }}
+
+                                    <span class="text">Informe seu CEP</span>
+                                    <form class="new-frete flex justify-between">
+                                        <label class="box-left flex align-center">
+                                            <input type="tel" class="crazy_cep" name="number-frete" minlength="9" required maxlength="9" placeholder="00000-000">
+                                        </label>
+                                        <button class="submit-frete">Calcular frete</button>
+                                    </form>
+                                    <div class="result"></div>
+
+                                </div>
+                            {% endif %}
+
+                            {{ productHelper.social() }}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if productHelper.bundle() %}
+            <div class="compre-junto">
+                <div class="title-section">
+                    <span class="string">Compre Junto</span>
+                </div>
+                <div class="product-cross-sell row">
+                    {{ productHelper.bundle() }}
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="page-info-product">
+
+            {% for key, tab in productTabs %}
+
+                {% if (loop.index == 2 or productTabs | length < 2 ) and settings.ficha %}
+
+                    <div id="ficha" class="section-box">
+
+                        <div class="title-section">
+                            <span>{{ settings.title_ficha ? settings.title_ficha : 'Ficha t&eacute;cnica' }}</span>
+                        </div>
+
+                        <div class="board_htm">
+                            <table>
+
+                                <tr>
+                                    <td>C&oacute;digo</td>
+                                    <td>{{ product.reference ? product.reference : product.id }}</td>
+                                </tr>
+
+                                {% if product.ean %}
+                                    <tr>
+                                        <td>C&oacute;digo de barras</td>
+                                        <td>{{ product.ean }}</td>
+                                    </tr>
+                                {% endif %}
+
+                                {% if settings.show_product_stock %}
+                                    <tr>
+                                        <td>Estoque</td>
+                                        <td>{{ product.stock }}</td>
+                                    </tr>
+                                {% endif %}
+
+                                {% if product.model %}
+                                    <tr>
+                                        <td>Modelo</td>
+                                        <td>{{ product.model }}</td>
+                                    </tr>
+                                {% endif %}
+
+                                {% if product.brand and 'brand' in productHelper.details() %}
+                                    <tr>
+                                        <td>Marca</td>
+                                        <td>{{ product.brand }}</td>
+                                    </tr>
+                                {% endif %}
+
+                                {% if product.included_items %}
+                                    <tr>
+                                        <td>Itens Inclusos</td>
+                                        <td>{{ product.included_items }}</td>
+                                    </tr>
+                                {% endif %}
+
+                                {% if product.warranty %}
+                                    <tr>
+                                        <td>Garantia</td>
+                                        <td>{{ product.warranty }}</td>
+                                    </tr>
+                                {% endif %}
+
+                                {% if product.availability and product.availability | length > 0 %}
+                                    <tr>
+                                        <td>Disponibilidade</td>
+                                        <td>{{ product.availability }}</td>
+                                    </tr>
+                                {% endif %}
+
+                            </table>
+                        </div>
+
+                    </div>
+                {% endif %}
+
+                {% if tab.container_id and (key != 'payment_methods') and key != 'included_items' and key != 'warranty' %}
+                    <div data-tab-id="{{ tab.container_id }}" class="section-box {{ key }}">
+
+                        <div class="title-section">
+                            <span>{{ tab.description }}</span>
+                        </div>
+
+                        {% if key == 'comments' %}
+
+                            {% element 'product/comments' %}
+
+                        {% elseif key == 'description' %}
+
+                            <div class="board_htm">
+                                {{ product.description ? product.description : product.description_small }}
+                            </div>
+
+                        {% elseif key == 'warranty' %}
+
+                            <div id="garantia" {{ tab.url ? 'data-url="'~ tab.url ~'"' }} class="prodBox">
+                            </div>
+
+                        {% elseif key == 'downloads' %}
+
+                            <div id="{{ tab.container_id | replace({'#' : ''}) }}" {{ tab.url ? 'data-url="'~tab.url~'"' }} ></div>
+
+                        {% elseif 'AdditionalTab' in key %}
+
+                            <div data-id="{{ tab.container_id }}"></div>
+
+                        {% elseif 'included_items' in key %}
+
+                            {{ product.included_items }}
+
+                        {% elseif key == 'properties' %}
+
+                            <div class="board_htm">
+                                {% element 'product/properties' %}
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+                {% endif %}
+
+                {# Needed to prevent error on Tray script #}
+                {% if tab.container_id and (key == 'payment_methods') %}
+                    <div style="display: none !important;">
+                        <span data-tab-container-id="{{ tab.container_id }}" data-tab-url="{{ tab.url }}" style="display: none !important;">{{ tab.description }}</span>
+                        <div data-tab-id="{{ tab.container_id }}" class="section-box {{ key }}" style="display: none !important;"></div>
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+
+            {{ productTabs.custom.content }}
+
+        </div>
+
+    </div>
+    <div class="section-avaliacoes">
+    <h2 class="title-section">
+        <span>Avaliações de clientes</span>
+    </h2>
+    {% element 'CustomerReview.reviews' %}
+</div>
+
+</div>
+
+{% if product.related_products %}
+    <div class="product-related">
+        <div class="container">
+            <div class="section-showcase">
+                {% element 'showcase' {
+                    "products"      : product.related_products,
+                    "showcaseTitle" : settings.title_related ? settings.title_related : "Produtos relacionados",
+                    "slide"         : true,
+                } %}
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% if settings.history_position %}
+    <div class="visited-section">
+        <div class="container">
+            <div class="section-showcase">
+                <div class="showcase list-slide">
+                    <h2 class="title-section"><span>Produtos visitados</span></h2>
+                    <div class="list-append" data-moeda="{{ settings.currency }}"></div>
+                    <div class="prev arrow-icon"></div>
+                    <div class="next arrow-icon"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
