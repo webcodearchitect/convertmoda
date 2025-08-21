@@ -1,0 +1,7 @@
+/* product embroidery */
+
+.embroidery-button {
+    background-color: var(--bg_button_primary);
+    padding: 4px;
+    color: var(--color_button_primary);
+}
