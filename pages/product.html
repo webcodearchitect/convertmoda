@@ -285,6 +285,8 @@
                                     </div>
                                 {% endif %}
 
+                                {% element 'snippets/product-embroidery' %}
+
                                 {% if not product.upon_request and product.available and productHelper.wishlist() %}
                                     <div class="wishlist">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -28 512.001 512" width="20" height="20">
@@ -294,7 +296,7 @@
                                     </div>
                                 {% endif %}
 
-<!-- Botão Comprar pelo WhatsApp -->
+<!-- Botï¿½o Comprar pelo WhatsApp -->
 <div style="text-align: center; margin-top: 10px;">
   <a id="whatsappButton" 
      href="#" 
@@ -329,7 +331,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (productNameElement) {
     const productName = productNameElement.innerText.trim();
-    const message = `Olá, gostaria de comprar o produto: ${productName}`;
+    const message = `Olï¿½, gostaria de comprar o produto: ${productName}`;
     const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     document.getElementById('whatsappButton').href = whatsappLink;
   }
@@ -337,7 +339,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 <style>
-/* Responsividade para o botão do WhatsApp */
+/* Responsividade para o botï¿½o do WhatsApp */
 @media (max-width: 768px) {
   #whatsappButton {
     width: 90%;
@@ -522,7 +524,7 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
     <div class="section-avaliacoes">
     <h2 class="title-section">
-        <span>Avaliações de clientes</span>
+        <span>Avaliaï¿½ï¿½es de clientes</span>
     </h2>
     {% element 'CustomerReview.reviews' %}
 </div>

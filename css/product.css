@@ -376,7 +376,7 @@
 }
 
 .fixed-modal .exit::before {
-    content: "×";
+    content: "ï¿½";
 }
 
 .fixed-modal .exit:hover {
@@ -2813,4 +2813,12 @@ div[style="clear:both;"] {
 
 .show-message {
     display: block !important;
+}
+
+/* product embroidery */
+
+.embroidery-button {
+    background-color: var(--bg_button_primary);
+    padding: 4px;
+    color: var(--color_button_primary);
 }
